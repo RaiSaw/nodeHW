@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NodeJS sample</title>
+</head>
+<body>
+    Hello, nice to see ya again!
+    <button id="clickme">Send</button>
+</body>
+<script>
+    const btn = document.getElementById("clickme")
+    async function send(){
+        const res = await fetch("api/info", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({information: "Fresh from the client💁‍♂️"})
+        })
+        console.log("Request sent!")
+    }
+    btn.addEventListener("click", send)
+</script>
+</html>
