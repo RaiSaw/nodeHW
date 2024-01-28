@@ -13,13 +13,13 @@ fs.readFile('./db.json', handleFile)
 function handleFile(err, data) {
     if(err) throw err;
     obj =  JSON.parse(data)
-    console.log(obj["models"])
+    console.log(obj["models"]);
 }
 
 // GET request
 const handleGetModels = (res) => {
     res.writeHead(200, {'Content-Type': 'application/json'});
-    res.end(JSON.stringify(models))
+    res.end(JSON.stringify(obj['models']));
 }
 
 //POST request
@@ -29,7 +29,7 @@ const handlePostModels = async (req, res) => {
         req.on('data', (chunk) => {body += chunk; })
         await new Promise((resolve, reject) => {
             req.on('end', () => {
-                const mods = JSON.parse(body); 
+                const mods = JSON.parse(body);
                 obj.models.push(mods);
                 console.log(obj.models);
                 fs.writeFile('db.json', JSON.stringify(obj), function(err){
