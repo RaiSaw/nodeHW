@@ -2,14 +2,18 @@
   "name": "nodehw",
   "version": "1.0.0",
   "description": "first node server",
-  "main": "index.js",
+  "main": "app.mjs",
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon server.js"
+    "start": "node app.mjs",
+    "dev": "nodemon app.mjs"
   },
   "author": "RaiS",
   "license": "ISC",
   "devDependencies": {
     "nodemon": "^3.0.3"
+  },
+  "type": "module",
+  "dependencies": {
+    "express": "^4.18.2"
   }
 }

@@ -6,8 +6,13 @@
     <title>NodeJS sample</title>
 </head>
 <body>
-    Hello, nice to see ya again!
-    <button id="clickme">Send</button>
+    <div>
+        <h1>Hello, would you like something to drink?</h1>
+        <button id="clickme">Sure!</button>
+    </div>
+    <div>
+        <img src="./fahmi-fakhrudin-nzyzAUsbV0M-unsplash.jpg" width="600px" height="200px" alt="coffee image"/>
+    </div>
 </body>
 <script>
     const btn = document.getElementById("clickme")
@@ -17,7 +22,7 @@
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({information: "Fresh from the client💁‍♂️"})
+            body: JSON.stringify({information: "here's a freshly-brewed ☕️"})
         })
         console.log("Request sent!")
     }
