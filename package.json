@@ -2,9 +2,9 @@
   "name": "nodehw",
   "version": "1.0.0",
   "description": "first node server",
-  "main": "app.mjs",
+  "main": "index.mjs",
   "scripts": {
-    "start": "node app.mjs",
+    "start": "node index.mjs",
     "dev": "nodemon app.mjs"
   },
   "author": "RaiS",
@@ -14,6 +14,9 @@
   },
   "type": "module",
   "dependencies": {
-    "express": "^4.18.2"
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "express-validator": "^7.0.1"
   }
 }

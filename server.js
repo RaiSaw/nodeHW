@@ -1,3 +1,4 @@
+// Express sample 1
 const express = require("express")
 const app = express()
 const PORT = 3000;
@@ -35,6 +36,7 @@ function consoleDB() {
     console.log("DB =", db)
 }
 cron(1000, consoleDB) */
+
 app
 .get("/", (req, res) => {
     console.log("Welcome!")

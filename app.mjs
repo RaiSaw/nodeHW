@@ -1,10 +1,9 @@
 import express from 'express';
 import path from 'path';
-
 const app = express()
 
 app.use(express.json())
-app.use(express.static('public'))/* (path.join(_dirname, 'public'))) */
+app.use(express.static('public'))/* (path.join(__dirname, 'public'))) */
 
 const db = []
 
@@ -27,7 +26,7 @@ app
     const {information} = req.body
     db.push(information)
     console.log('💁:', information)
-    res.status(418)./* json({"message": information}) */send(information)
+    res.status(201)./* json({"message": information}) */send(information)
 })
 .get("/([\$])foryou", (req, res) => {
     res.status(201).send(`💁, ${db}`);
