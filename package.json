@@ -2,10 +2,10 @@
   "name": "nodehw",
   "version": "1.0.0",
   "description": "first node server",
-  "main": "index.mjs",
+  "main": "app2.mjs",
   "scripts": {
-    "start": "node index.mjs",
-    "dev": "nodemon app.mjs"
+    "start": "node app2.mjs",
+    "dev": "nodemon app2.mjs"
   },
   "author": "RaiS",
   "license": "ISC",

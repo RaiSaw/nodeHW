@@ -2,13 +2,15 @@ import { Router } from "express";
 import { query, validationResult, checkSchema, matchedData } from "express-validator";
 import { models } from "../utils/constants.mjs"
 import { handleIndexId } from "../utils/middlewares.mjs"
+import { schema } from '../utils/validationSchema.mjs';
 
 const router = Router();
 router
 .get(
     "/models",
-    query("filter")
-        /* .isString() */ // it'll be string anyway
+    query("title")
+        .isString()
+        .withMessage("Must be a string")
         .notEmpty()
         .withMessage("Must not be empty")
         .isLength({ min: 3, max: 10})
@@ -17,12 +19,13 @@ router
         const result = validationResult(req);
         console.log(result);
         const { query: { filter, value } } = req;
-        if (filter && value) return res.send( models.filter((mod) => mod[filter].includes(value)))
+        if (filter && value)
+            return res.send(models.filter((mod) => mod[filter].includes(value)))
         return res.send(models);
 })
 .post(
     "/models",
-    checkSchema(userSchema),
+    checkSchema(schema),
     (req, res) => {
         const result = validationResult(req);
         console.log(result);
@@ -35,11 +38,6 @@ router
 })
 .get("/models/:id", handleIndexId, (req, res) => {
     const { findModIndex } = req;
-    /* console.log(req.params);
-    const parsedId = parseInt(req.params.id);
-    if (isNaN(parsedId))
-    return res.status(400).send({msg: "Bad request!"}); */
-    /* const findUser = users.find((user) => user.id === parsedId); */
     const findMod = models[findModIndex];
     if (!findMod) return res.sendStatus(404);
     return res.send(findMod);
@@ -52,7 +50,7 @@ router
 })
 .patch("/models/:id", handleIndexId, (req, res) => {
     const { body, findModIndex } = req;
-    users[findModIndex] = {...users[findModIndex], ...body};
+    models[findModIndex] = {...models[findModIndex], ...body};
     return res.sendStatus(204);
 })
 .delete("/models/:id", handleIndexId, (req, res) => {

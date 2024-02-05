@@ -1,10 +1,9 @@
+// Express 
 import express from 'express';
-import router from "./routes/user.mjs"
+import router from "./routes/model.mjs"
 import { models } from './utils/constants.mjs';
 import path from 'path';
 import { query } from "express-validator"
-import { fs } from 'express';
-
 
 const app = express()
 app.use(express.json())
