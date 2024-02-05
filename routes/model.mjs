@@ -29,38 +29,35 @@ router
         if (!result.isEmpty())
             return res.status(400).send({errors: result.array()});
         const data = matchedData(req);
-        /* console.log(req.body);
-        const { body } = req; */
-        const newUser = {id: users[users.length - 1].id + 1, ...data};
-        users.push(newUser);
+        const newMod = {id: models[models.length - 1].id + 1, ...data};
+        models.push(newMod);
         return res.send(200)
 })
-.get("/users/:id", handleIndexId, (req, res) => {
-    const { findUserIndex } = req;
+.get("/models/:id", handleIndexId, (req, res) => {
+    const { findModIndex } = req;
     /* console.log(req.params);
     const parsedId = parseInt(req.params.id);
     if (isNaN(parsedId))
     return res.status(400).send({msg: "Bad request!"}); */
     /* const findUser = users.find((user) => user.id === parsedId); */
-    const findUser = users[findUserIndex];
-    if (!findUser) return res.sendStatus(404);
-    return res.send(findUser);
+    const findMod = models[findModIndex];
+    if (!findMod) return res.sendStatus(404);
+    return res.send(findMod);
 })
 
-.put("/users/:id", handleIndexId, (req, res) => {
-    const { body, findUserIndex } = req;
-    /* users[findUserIndex] = {id : parsedId, ...body}; */
-    users[findUserIndex] = {id : users[findUserIndex].id, ...body};
+.put("/models/:id", handleIndexId, (req, res) => {
+    const { body, findModIndex } = req;
+    models[findModIndex] = {id : models[findModIndex].id, ...body};
     return res.sendStatus(204);
 })
-.patch("/users/:id", handleIndexId, (req, res) => {
-    const { body, findUserIndex } = req;
-    users[findUserIndex] = {...users[findUserIndex], ...body};
+.patch("/models/:id", handleIndexId, (req, res) => {
+    const { body, findModIndex } = req;
+    users[findModIndex] = {...users[findModIndex], ...body};
     return res.sendStatus(204);
 })
-.delete("/users/:id", handleIndexId, (req, res) => {
-    const {findUserIndex} = req;
-    users.splice(findUserIndex, 1);
+.delete("/models/:id", handleIndexId, (req, res) => {
+    const {findModIndex} = req;
+    models.splice(findModIndex, 1);
     return res.sendStatus(200);
 })
 
