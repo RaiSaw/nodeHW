@@ -22,3 +22,31 @@ export const models = [
     {"id":14,"title":"Leaf sheep","type":"object","imgUrl":"https://images.app.goo.gl/Kay89ThhZavWjsvk9"},
     {"id":15,"title":"Cosmic draw","type":"object","imgUrl":"https://www.esa.int/ESA_Multimedia/Images/2022/02/A_cosmic_draw"}
 ]
+
+export const movingPlants = [
+    {
+        name:"Mimosa",
+        id:1,
+        description: "Leaves close after being touched"
+    },
+    {
+        name:"Venus flytrap",
+        id:2,
+        description: "Catches its prey with the jaw-like hairs being triggered trapping its prey"
+    },
+    {
+        name:"Bladderwort",
+        id:3,
+        description: "Carnivorous and captures small organisms by means of bladder-like traps"
+    },
+    {
+        name:"Waterwheel plant",
+        id:4,
+        description: "Captures small aquatic invertebrates using snap-traps arranged in whorls around a central, free-floating stem"
+    },
+    {
+        name:"Telegraph plant",
+        id:5,
+        description: "Small leaflets rotate along an elliptical path(like the blades of a kayak paddle)"
+    },
+];

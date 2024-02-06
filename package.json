@@ -2,9 +2,9 @@
   "name": "nodehw",
   "version": "1.0.0",
   "description": "first node server",
-  "main": "app2.mjs",
+  "main": "server.mjs",
   "scripts": {
-    "start": "node app2.mjs",
+    "start": "node server.mjs",
     "dev": "nodemon app2.mjs"
   },
   "author": "RaiS",
@@ -15,8 +15,13 @@
   "type": "module",
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "express": "^4.18.2",
-    "express-validator": "^7.0.1"
+    "express-session": "^1.18.0",
+    "express-validator": "^7.0.1",
+    "mongoose": "^8.1.1",
+    "passport": "^0.7.0",
+    "passport-local": "^1.0.0"
   }
 }

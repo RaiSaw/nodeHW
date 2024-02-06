@@ -3,6 +3,7 @@ import { query, validationResult, checkSchema, matchedData } from "express-valid
 import { users } from "../utils/constants.mjs"
 import { handleIndexId } from "../utils/middlewares.mjs"
 import { userSchema } from "../utils/validationSchema.mjs"
+import { User } from "../mongoose/user.mjs";
 
 const router = Router();
 router
@@ -37,6 +38,27 @@ router
         const newUser = {id: users[users.length - 1].id + 1, ...data};
         users.push(newUser);
         return res.send(200)
+})
+
+// database
+.post(
+    "/users",
+    checkSchema(userSchema),
+    async (req, res) => {
+        const result = validationResult(req);
+        if (!result.isEmpty())
+            return res.status(400).send(result.array());
+        /* const {body} = req; */
+        const data = matchedData(req);
+        console.log(data);
+        const newUser = new User(data);
+        try {
+            const savedUser = await newUser.save();//async
+            return res.status(201).send(savedUser);
+        } catch (err){
+            console.log(err)
+            return res.status(400);
+        }
 })
 .get("/users/:id", handleIndexId, (req, res) => {
     const { findUserIndex } = req;

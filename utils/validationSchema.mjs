@@ -26,5 +26,16 @@ export const schema = {
             errorMessage: "Must not be empty",
         },
         isString: true,
-    }
+    },
+    type: {
+        notEmpty: {
+            errorMessage: "Must not be empty",
+        },
+        isString: true,
+    },
+    imgUrl: {
+        notEmpty: {
+            errorMessage: "Must not be empty",
+        },
+    },
 };
