@@ -4,7 +4,7 @@
   "description": "first node server",
   "main": "server.mjs",
   "scripts": {
-    "start": "node server.mjs",
+    "start": "nodemon server.mjs",
     "dev": "nodemon app2.mjs"
   },
   "author": "RaiS",
