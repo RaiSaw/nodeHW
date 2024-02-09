@@ -11,7 +11,7 @@ export const userSchema = {
             errorMessage: "Must not be empty",
         },
         isString: true,
-    }
+    },
 };
 export const schema = {
     title: {

@@ -1,4 +1,4 @@
-// In-Depth Express - Ans
+// Express - Ans
 import express from 'express';
 import router from "./routes/cookie.mjs"
 import { query, validationResult, checkSchema, body, matchedData } from "express-validator";
@@ -8,8 +8,10 @@ import { handleIndexId } from './utils/middlewares.mjs';
 import cookieParser from 'cookie-parser';
 import session from 'express-session';
 import mongoose from "mongoose"
+import passport from "passport"
+import MongoStore from 'connect-mongo';
 
-const app = express()
+const app = express();
 
 mongoose
     .connect("mongodb://localhost/express_tut")
@@ -21,9 +23,12 @@ app.use(express.static('public'))
 app.use(cookieParser(/* "secret" */))  // signed cookies - any str value
 app.use(session({
     secret:"whateverthatis",
-    saveUninitialized: false,
+    saveUninitialized: false,// only when u modify the session will it be saved
     resave: false,
-    cookie: {maxAge: 60000*60},
+    cookie: { maxAge: 60000*60 },
+    store: MongoStore.create({
+        client: mongoose.connection.getClient(),
+    })
 }))
 
 app.use(passport.initialize());
@@ -42,6 +47,7 @@ app.use(router);
     req.findUserIndex = findUserIndex;
     next();
 } */
+
 const port = process.env.port || 3000;
 // Cookies🍪 - web server🧑‍🍳 => data 🚌 Web browser => cl computer🧑‍💻
 app
@@ -77,6 +83,17 @@ app
         res.sendStatus(200)
     })
 })
+.get("/api/auth/discord", passport.authenticate("discord"));
+// will redirect u to 3rd-party platform, clicking on 'authorize' will redirect us on callback url
+app.get(
+    "/api/auth/discord/redirect",
+    passport.authenticate("discord"),// 2nd time authenticate-it will take the code query and exchange with an access& refresh token, @ the end it'll call the verify fn 
+
+    (req, res) => {
+        res.sendStatus(200);
+    }
+)
+
 
 .listen(port, () => {
     console.log(`Server running on port ${port}`)
