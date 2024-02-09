@@ -4,6 +4,7 @@ import { users } from "../utils/constants.mjs"
 import { handleIndexId } from "../utils/middlewares.mjs"
 import { userSchema } from "../utils/validationSchema.mjs"
 import { User } from "../mongoose/user.mjs";
+import { hashPassword } from "../utils/helpers.mjs";
 
 const router = Router();
 router
@@ -24,7 +25,7 @@ router
         if (filter && value) return res.send( users.filter((user) => user[filter].includes(value)))
         return res.send(users);
 })
-.post(
+/* .post(
     "/users",
     checkSchema(userSchema),
     (req, res) => {
@@ -33,14 +34,14 @@ router
         if (!result.isEmpty())
             return res.status(400).send({errors: result.array()});
         const data = matchedData(req);
-        /* console.log(req.body);
-        const { body } = req; */
+        console.log(req.body);
+        const { body } = req;
         const newUser = {id: users[users.length - 1].id + 1, ...data};
         users.push(newUser);
         return res.send(200)
-})
+}) */
 
-// database
+// Database
 .post(
     "/users",
     checkSchema(userSchema),
@@ -51,9 +52,11 @@ router
         /* const {body} = req; */
         const data = matchedData(req);
         console.log(data);
+        data.password = hashPassword(data.password)
+        console.log(data)
         const newUser = new User(data);
         try {
-            const savedUser = await newUser.save();//async
+            const savedUser = await newUser.save(); //async
             return res.status(201).send(savedUser);
         } catch (err){
             console.log(err)
