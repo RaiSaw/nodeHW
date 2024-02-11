@@ -11,7 +11,7 @@ router
 .get(
     "/users",
     query("filter")
-        .isString()
+        /* .isString() */
         /* .withMessage("Must be string") */
         .notEmpty()
         .withMessage("Must not be empty")

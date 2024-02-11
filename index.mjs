@@ -8,11 +8,12 @@ import { handleIndexId } from './utils/middlewares.mjs';
 import cookieParser from 'cookie-parser';
 import session from 'express-session';
 import mongoose from "mongoose"
+import passport from "passport"
 
 const app = express()
 
 mongoose
-    .connect("mongodb://localhost/express_tut")
+    .connect("mongodb://localhost:27017")
     .then(() => console.log("Connected to db"))
     .catch((err) => console.log(`Error: ${err}`))
 
@@ -42,6 +43,7 @@ app.use(router);
     req.findUserIndex = findUserIndex;
     next();
 } */
+
 const port = process.env.port || 3000;
 // Cookies🍪 - web server🧑‍🍳 => data 🚌 Web browser => cl computer🧑‍💻
 app

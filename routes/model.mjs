@@ -3,8 +3,7 @@ import { query, validationResult, checkSchema, matchedData } from "express-valid
 import { models } from "../utils/constants.mjs"
 import { handleIndexId } from "../utils/middlewares.mjs"
 import { schema } from '../utils/validationSchema.mjs';
-/* import pkg from 'express';
-const {fs} = pkg; */
+
 
 const router = Router();
 router
@@ -18,13 +17,13 @@ router
         .isLength({ min: 3, max: 10})
         .withMessage("Must be at least 3-10 characters"),
     (req, res) => {
-        fs.readFile('../db.json', (err, data) => {
+        /* fs.readFile('../db.json', (err, data) => {
             if (err) {
               next(err) // Pass errors to Express.
             } else {
               res.send(data)
             }
-        })
+        }) */
         const result = validationResult(req);
         console.log(result);
         const { query: { filter, value } } = req;
@@ -34,6 +33,7 @@ router
 })
 .post(
     "/models",
+    //[body("propName").method().method(), body("propName2").method()]
     checkSchema(schema),
     (req, res) => {
         const result = validationResult(req);
