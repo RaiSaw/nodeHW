@@ -3,14 +3,32 @@ export const userSchema = {
         isLength: {
             options: {
                 min: 3,
-                max: 10,
+                max: 25,
             },
-            errorMessage: "Must be at least 3-10 characters",
+            errorMessage: "Must be at least 3-25 characters",
         },
         notEmpty: {
             errorMessage: "Must not be empty",
         },
         isString: true,
+    },
+    password: {
+        notEmpty: {
+            errorMessage: "Must not be empty",
+        },
+        isString: true,
+        isLength: {
+            options: {
+                min: 8,
+                max: 30,
+            },
+            errorMessage: "Must be at least 8-30 characters",
+        },
+    },
+    email: {
+        notEmpty: {
+            errorMessage: "Must not be empty",
+        },
     }
 };
 export const schema = {
@@ -18,9 +36,9 @@ export const schema = {
         isLength: {
             options: {
                 min: 3,
-                max: 10,
+                max: 25,
             },
-            errorMessage: "Must be at least 3-10 characters",
+            errorMessage: "Must be at least 3-25 characters",
         },
         notEmpty: {
             errorMessage: "Must not be empty",

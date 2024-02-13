@@ -1,10 +1,11 @@
-// HW > CRUD Express > Auth_Mongo-CRUD
+// CRUD Models
 import express from 'express';
 import router from "./routes/model.mjs"
 import { models } from './utils/constants.mjs';
 import path from 'path';
-import { query } from "express-validator"
+import { schema } from './utils/validationSchema.mjs';
 import { connectToDB, getDB } from './mongo.mjs';
+import { query, validationResult, checkSchema, matchedData } from "express-validator";
 
 let db;
 
@@ -22,26 +23,25 @@ connectToDB((error) => {
         })
         db = getDB();
     }
-});
+})
 
-app.get("/models", (req, res) => {
+app
+.get("/models", (req, res) => {
     //toArray(), forEach()- iterate on db-documents
     db.collection("models")
-        .find().toArray()
+        .find()
+        .toArray()
         .then(resp => {
             res.status(200).json(resp)
         }).catch(err => {
             res.status(500).json({error: "Oops, couldn't retrieve data!" })
         })
-});
+})
 
-app.get("/models/:id", (req, res) => {
+.get("/models/:id", (req, res) => {
     const parsedId = parseInt(req.params.id);
-    if (isNaN(parsedId)) {
-        return res.status(400).json({ error: "Invalid ID format." });
-    }
         db.collection("models")
-            .findOne({id: parsedId})
+            .findOne({id: req.params.id})
             .then((resp) => {
                 if (resp){
                     res.status(200).json(resp);
@@ -54,26 +54,38 @@ app.get("/models/:id", (req, res) => {
                 error: `Could not fetch model id: ${parsedId} with error: ${error}`,
               });
             });
-});
+})
 
-app.post("/newModel", (req, res) => {
-    const body = req.body;
-    //call express-validation here
-    if (!body) {
-        return res.status(400).json({ error: "Model body is empty." });
-    }
+.post("/newModel", checkSchema(schema), async (req, res) => {
+    const result = validationResult(req);
+    console.log(result);
+    const data = matchedData(req);
+    const dbs = [];
+    await db.collection("models")
+        .countDocuments()
+        .then(resp => {
+            console.log(resp)
+            dbs.push(resp)
+            console.log(dbs)
+        }).catch(err => {
+            console.error("Error getting length:", err);
+        })
+    const newMod = {id: (parseInt(dbs) + 1), ...data}; //   will change this to _id
     db.collection("models")
-        .insertOne(body)
+        .insertOne(newMod)
         .then(resp => {
             res.status(200).json(resp)
+            console.log(resp)
         }).catch(err => {
             console.error("Error creating new model:", err);
             res.status(500).json({error: "Oops, couldn't create a new model!" })
         })
-});
+})
 
-app.patch("/models/:id", (req, res) => {
+.patch("/models/:id", (req, res) => {
     const body = req.body;
+    const result = validationResult(req);
+    console.log(result);
     const parsedId = parseInt(req.params.id);
     if (isNaN(parsedId)) {
         return res.status(400).json({ error: "Invalid ID format." });
@@ -86,18 +98,19 @@ app.patch("/models/:id", (req, res) => {
             console.error("Error updating model:", err);
             res.status(500).json({error: "Oops, couldn't update the model!" })
         })
-});
+})
 
-app.put("/models/:id", (req, res) => {
-    const body = req.body;
+.put("/models/:id", checkSchema(schema), (req, res) => {
+    const result = validationResult(req);
+    console.log(result);
     const parsedId = parseInt(req.params.id);
+    const data = matchedData(req);
     if (isNaN(parsedId)) {
         return res.status(400).json({ error: "Invalid ID format." });
     }
-    const filter = { id: parsedId };
-
+    const newMod = {id: parsedId, ...data};
     db.collection("models")
-        .replaceOne( filter, body )
+        .replaceOne({ id: parsedId }, newMod )
         .then(resp => {
             if (resp.matchedCount === 1) {
                 res.status(200).json(resp);
@@ -108,10 +121,12 @@ app.put("/models/:id", (req, res) => {
             console.error("Error replacing model:", err);
             res.status(500).json({error: "Oops, couldn't replace the model!" })
         })
-});
+})
 
-app.delete("/models/:id", (req, res) => {
+.delete("/models/:id", (req, res) => {
     const parsedId = parseInt(req.params.id);
+    const result = validationResult(req);
+    console.log(result);
     if (isNaN(parsedId)) {
         return res.status(400).json({ error: "Invalid ID format." });
     }

@@ -1,6 +1,7 @@
 import { users } from "./constants.mjs";
 import { models } from "./constants.mjs";
 
+
 // Middlewares
 /* const loggingMw = (req, res, next) => {
     console.log(`${req.method} - ${req.url}`);

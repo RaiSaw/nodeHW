@@ -11,20 +11,27 @@ router
 .get(
     "/users",
     query("filter")
-        /* .isString() */
-        /* .withMessage("Must be string") */
         .notEmpty()
         .withMessage("Must not be empty")
         .isLength({ min: 3, max: 10})
         .withMessage("Must be at least 3-10 characters"),
     (req, res) => {
         const result = validationResult(req);
-        console.log(result);
+        console.log(req.session.id);
+        req.sessionStore.get(request.session.id, (err, sessionData) => {
+            if (err) {
+                console.log(err)
+                throw err
+            }
+            console.log("Inside Session Store Get")
+            console.log(sessionData)
+        })
         /* console.log(req.query); */
         const { query: { filter, value } } = req;
         if (filter && value) return res.send( users.filter((user) => user[filter].includes(value)))
         return res.send(users);
 })
+// Validation
 /* .post(
     "/users",
     checkSchema(userSchema),
@@ -43,17 +50,16 @@ router
 
 // Database
 .post(
-    "/users",
-    checkSchema(userSchema),
-    async (req, res) => {
+    "/users", checkSchema(userSchema), async (req, res) => {
         const result = validationResult(req);
         if (!result.isEmpty())
             return res.status(400).send(result.array());
-        /* const {body} = req; */
+        /* const {body} = req;
+        */
         const data = matchedData(req);
         console.log(data);
-        data.password = hashPassword(data.password)
-        console.log(data)
+        data.password = hashPassword(data.password)// async if use in helpers.js
+        /* console.log(data) */
         const newUser = new User(data);
         try {
             const savedUser = await newUser.save(); //async

@@ -1,8 +1,8 @@
 // temporary db
 export const users = [
-    {name:"Ren", id:1},
-    {name:"Ru", id:2},
-    {name:"Rob", id:3},
+    {name:"Ren", password: "123till8", id:1},
+    {name:"Ru", password: "345til10", id:2},
+    {name:"Rob", password: "567til12", id:3},
 ];
 
 export const models = [
