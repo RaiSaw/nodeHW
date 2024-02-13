@@ -4,11 +4,11 @@ import { users } from "../utils/constants.mjs"
 import { User } from "../mongoose/user.mjs"
 
 //tells passport how to serialize data into the session
-passport.serializeUser(user, done) => {
+passport.serializeUser((user, done) => {
     console.log(`Inside Serialize User`)
     console.log(user)
     done(null, user.id)
-}
+})
 //take id and reveal the user - when deserializing u dont need all the user info, just id
 passport.deserializeUser(async(id, done) => {
     console.log(`Inside Deserializer`)
@@ -40,7 +40,7 @@ passport.deserializeUser(async(id, done) => {
 ) */
 // database
 export default passport.use(
-    new Strategy( /* {usernameField: "email"}, */(username, password, done) => {
+    new Strategy( /* {usernameField: "email"}, */async (username, password, done) => {
         try {
            const findUser = await User.findOne({username})
            if (!findUser) throw new Error("User not found")
@@ -50,4 +50,4 @@ export default passport.use(
             done(null, err);
         }
     })
-) 
+)
