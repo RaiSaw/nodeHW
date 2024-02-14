@@ -10,16 +10,16 @@ import { User } from "../mongoose/user.mjs";
 	return response.send(findUser);
 }; */
 
-export const createUserHandler = async (request, response) => {
-	const result = validationResult(request);
-	if (!result.isEmpty()) return response.status(400).send(result.array());
-	const data = matchedData(request);
+export const createUserHandler = async (req, res) => {
+	const result = validationResult(req);
+	if (!result.isEmpty()) return res.status(400).send(result.array());
+	const data = matchedData(req);
 	data.password = hashPassword(data.password);
 	const newUser = new User(data);
 	try {
 		const savedUser = await newUser.save();
-		return response.status(201).send(savedUser);
+		return res.status(201).send(savedUser);
 	} catch (err) {
-		return response.sendStatus(400);
+		return res.sendStatus(400);
 	}
 };

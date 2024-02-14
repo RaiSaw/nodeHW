@@ -1,9 +1,9 @@
 // CRUD Models
 import express from 'express';
-import router from "./routes/model.mjs"
-import { models } from './utils/constants.mjs';
+import router from "./src/routes/model.mjs"
+import { models } from './src/utils/constants.mjs';
 import path from 'path';
-import { schema } from './utils/validationSchema.mjs';
+import { schema } from './src/utils/validationSchema.mjs';
 import { connectToDB, getDB } from './mongo.mjs';
 import { query, validationResult, checkSchema, matchedData } from "express-validator";
 
@@ -11,8 +11,6 @@ let db;
 
 const app = express()
 app.use(express.json())
-/* app.use(express.static('public')) */
-/* app.use(router); */
 
 const port = process.env.port || 3000;
 

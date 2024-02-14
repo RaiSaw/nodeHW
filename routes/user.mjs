@@ -5,6 +5,7 @@ import { handleIndexId } from "../utils/middlewares.mjs"
 import { userSchema } from "../utils/validationSchema.mjs"
 import { User } from "../mongoose/user.mjs";
 import { hashPassword } from "../utils/helpers.mjs";
+import { createUserHandler } from "../handlers/users.mjs";
 
 const router = Router();
 router
@@ -13,12 +14,11 @@ router
     query("filter")
         .notEmpty()
         .withMessage("Must not be empty")
-        .isLength({ min: 3, max: 10})
-        .withMessage("Must be at least 3-10 characters"),
-    (req, res) => {
-        const result = validationResult(req);
+        .isLength({ min: 5, max: 15})
+        .withMessage("Must be at least 5-15 characters"),
+    async (req, res) => {
         console.log(req.session.id);
-        req.sessionStore.get(request.session.id, (err, sessionData) => {
+        req.sessionStore.get(req.session.id, (err, sessionData) => {
             if (err) {
                 console.log(err)
                 throw err
@@ -26,76 +26,67 @@ router
             console.log("Inside Session Store Get")
             console.log(sessionData)
         })
-        /* console.log(req.query); */
-        const { query: { filter, value } } = req;
+	    try {
+	    	const data = await User.find();
+	    	res.json(data)
+	    } catch (err) {
+	    	res.status(500).json({message: err.message})
+	    }
+        /* const { query: { filter, value } } = req;
         if (filter && value) return res.send( users.filter((user) => user[filter].includes(value)))
-        return res.send(users);
+        return res.send(users); */
 })
-// Validation
-/* .post(
+
+.get("/users/:id", async (req, res) => {
+    const {id} = req.params
+    console.log(id)
+    try {
+        const data = await User.findById(id)
+        console.log(data)
+        res.json(data)
+   }
+   catch (error) {
+       res.status(400).json({message: error.message})
+   }
+})
+
+.post(
     "/users",
     checkSchema(userSchema),
-    (req, res) => {
-        const result = validationResult(req);
-        console.log(result);
-        if (!result.isEmpty())
-            return res.status(400).send({errors: result.array()});
-        const data = matchedData(req);
-        console.log(req.body);
-        const { body } = req;
-        const newUser = {id: users[users.length - 1].id + 1, ...data};
-        users.push(newUser);
-        return res.send(200)
+    createUserHandler
+)
+
+/* .put("/users/:id", handleIndexId, (req, res) => {
+
 }) */
 
-// Database
-.post(
-    "/users", checkSchema(userSchema), async (req, res) => {
-        const result = validationResult(req);
-        if (!result.isEmpty())
-            return res.status(400).send(result.array());
-        /* const {body} = req;
-        */
-        const data = matchedData(req);
-        console.log(data);
-        data.password = hashPassword(data.password)// async if use in helpers.js
-        /* console.log(data) */
-        const newUser = new User(data);
-        try {
-            const savedUser = await newUser.save(); //async
-            return res.status(201).send(savedUser);
-        } catch (err){
-            console.log(err)
-            return res.status(400);
-        }
-})
-.get("/users/:id", handleIndexId, (req, res) => {
-    const { findUserIndex } = req;
-    /* console.log(req.params);
-    const parsedId = parseInt(req.params.id);
-    if (isNaN(parsedId))
-    return res.status(400).send({msg: "Bad request!"}); */
-    /* const findUser = users.find((user) => user.id === parsedId); */
-    const findUser = users[findUserIndex];
-    if (!findUser) return res.sendStatus(404);
-    return res.send(findUser);
+.patch("/users/:id", async(req, res) => {
+	/* const data = matchedData(req);
+	data.password = hashPassword(data.password);
+	const newUser = new User(data); */
+    try{
+        const id = req.params.id
+        const upData = req.body
+        console.log(upData)
+        const options = { new: true }
+        /* upData.password = hashPassword(upData.password); */
+        const data = await User.findByIdAndUpdate( id, upData, options)
+        res.send(data)
+    }
+    catch (error) {
+        res.status(400).json({message: error.message})
+    }
 })
 
-.put("/users/:id", handleIndexId, (req, res) => {
-    const { body, findUserIndex } = req;
-    /* users[findUserIndex] = {id : parsedId, ...body}; */
-    users[findUserIndex] = {id : users[findUserIndex].id, ...body};
-    return res.sendStatus(204);
-})
-.patch("/users/:id", handleIndexId, (req, res) => {
-    const { body, findUserIndex } = req;
-    users[findUserIndex] = {...users[findUserIndex], ...body};
-    return res.sendStatus(204);
-})
-.delete("/users/:id", handleIndexId, (req, res) => {
-    const {findUserIndex} = req;
-    users.splice(findUserIndex, 1);
-    return res.sendStatus(200);
+.delete("/users/:id", async(req, res) => {
+    try {
+        const id = req.params.id
+        const data = await User.findByIdAndDelete(id)
+        res.send(`${data.name} has been deleted 😔!` )
+    }
+    catch (error) {
+        res.status(400).json({message: error.message})
+    }
 })
 
 export default router;
