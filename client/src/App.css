@@ -1,0 +1,160 @@
+.App {
+  font-family: "Ubuntu", sans-serif;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body .main {
+  width: 400px;
+  height: 560px;
+  border-radius: 1.5em;
+  box-shadow: 0px 11px 35px 2px rgba(46, 2, 90, 0.14);
+  padding: 1rem;
+  align-items: center;
+  align-content: center;
+}
+
+form.form1 {
+  justify-content: center;
+  align-items: center;
+}
+.errorMessage {
+  /* ustify-self: center; */
+  align-items: center;
+  margin-left: 6rem;
+  margin-top: -18px;
+  margin-bottom: 6px;
+ /*  text-align: center; */
+  color: red;
+}
+.eye {
+  margin-right: 2rem;
+  margin-top: 0.7rem;
+  border-radius: 0.5rem;
+}
+.sign {
+  padding-top: 40px;
+  font-family: "Ubuntu", sans-serif;
+  font-weight: bold;
+  font-size: 23px;
+}
+
+.username, .password, .email {
+  width: 76%;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 1px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  outline: none;
+  box-sizing: border-box;
+  border: 2px solid rgba(0, 0, 0, 0.02);
+  margin-left: 46px;
+  text-align: center;
+  margin-bottom: 27px;
+  font-family: "Ubuntu", sans-serif;
+}
+#username, #email, #password {
+  width: "100%";
+  margin-right: 5rem;
+}
+.username:focus,
+.password:focus, .email:focus {
+  border: 2px solid rgba(0, 0, 0, 0.18) !important;
+}
+
+.submit {
+  cursor: pointer;
+  border-radius: 5em;
+  color: #fff;
+  background: linear-gradient(to right, #9c27b0,  #532dd1);
+  border: 0;
+  padding: 10px 40px;
+  font-family: "Ubuntu", sans-serif;
+  font-size: 13px;
+  box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
+  margin-left: 9rem;
+}
+
+.redi {
+  text-shadow: 0px 0px 3px rgba(117, 117, 117, 0.12);
+  color: #9c27b0;
+  margin-top: 1rem;
+}
+
+.authText {
+  margin-top: -2px;
+  text-align: 'center';
+  color:rgba(0, 0, 0, 0.7);
+}
+
+.auth {
+  font-size: larger;
+  padding: 5px;
+  color: #532dd1;
+}
+/* Nav */
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 70px;
+  background-color:#532dd1;
+  display: flex;
+  align-items: center;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.navbar .links {
+  flex: 50%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.navbar .loggedInContainer {
+  flex: 50%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin: 1rem;
+}
+a {
+  margin-left: 20px;
+  text-decoration: none;
+  color: white;
+}
+
+.navbar button {
+  width: 100px;
+  height: 40px;
+  cursor: pointer;
+  margin-right: 10px;
+  background-color: white;
+}
+
+.navbar h1 {
+  text-align: right;
+  margin-right: 10px;
+  color: white;
+  font-weight: lighter;
+}
+
+.card {
+  border-radius: 1.5em;
+  box-shadow: 0px 11px 35px 2px rgba(0, 2, 0, 0.14);
+  padding: 0.5rem;
+  align-items: center;
+  align-content: center;
+  margin: 2px;
+}

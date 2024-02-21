@@ -1,0 +1,28 @@
+POST http://localhost:3000/login
+Content-Type: application/json
+
+{
+    "name": "Ren",
+    "password": "valentine"
+}
+
+###
+GET  http://localhost:3000/status
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiUmVuIiwicGFzc3dvcmQiOiIkMmEkMTAkOGMuRDBROEN0S25QREpUd0JaaHIzZWlsakZ1TVJzQXJNdllOSXMzL250WnIwakFaaXhNNlMiLCJpYXQiOjE3MDgyODIwNzksImV4cCI6MTcwODI4MjI1OX0.iu6B4P39_JaH4mYmxta-coPJsSZduu-rzL9tCDQjRog
+
+###
+POST  http://localhost:3000/token
+Content-Type: application/json
+
+{
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiUmVuIiwicGFzc3dvcmQiOiIkMmEkMTAkOGMuRDBROEN0S25QREpUd0JaaHIzZWlsakZ1TVJzQXJNdllOSXMzL250WnIwakFaaXhNNlMiLCJpYXQiOjE3MDgyODE3OTF9.-F17RYebGRxLK35oJjwE0wqy-symIMvNDV_Y-QBOCns"
+}
+
+
+###
+DELETE http://localhost:3000/logout
+Content-Type: application/json
+
+{
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiUmVuIiwicGFzc3dvcmQiOiIkMmEkMTAkOGMuRDBROEN0S25QREpUd0JaaHIzZWlsakZ1TVJzQXJNdllOSXMzL250WnIwakFaaXhNNlMiLCJpYXQiOjE3MDgyODE3OTF9.-F17RYebGRxLK35oJjwE0wqy-symIMvNDV_Y-QBOCns"
+}
