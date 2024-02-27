@@ -1,0 +1,138 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  .App {
+    display: flex;
+    flex: 1;
+    height: 100vh;
+    width: 100%;
+    flex-direction: column;
+    padding: 16px;
+    justify-content: center;
+    align-items: center;
+    scroll-behavior: smooth;
+    font-family: Poppins, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-y: overlay;
+  }
+  #contact-title {
+    text-transform: capitalize;
+    font-weight: bolder;
+    filter: drop-shadow(black 1px 1px 1px);
+  }
+
+  #contact-p, .label-contact{
+    font-weight:bold;
+    margin: 0.2rem;
+    filter: drop-shadow(black 1px 1px 1px);
+  }
+
+#search {
+    border: 1px solid blue;
+    color: blue;
+    -webkit-transition: -webkit-transform 0.5s;
+    transition: transform 0.5s ease;
+  }
+  #search:hover {
+    background-color: blue;
+    color: #fff;
+    -webkit-transform:scale(1.05);
+    transform:scale(1.05);
+  }
+
+  .card-item {
+    display: inline-flex;
+    /* list-style-type: disc; */
+    list-style-position: inside;
+    margin: 0.8rem;
+    cursor: pointer;
+    position: relative;
+    line-height: 24px;
+    filter: drop-shadow(black 1px 1px 1px);
+  }
+  .card-item:before {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 1px;
+    left: 50%;
+    bottom: -3px;
+    transition: 0.3s;
+  }
+  .card-item:hover::before {
+    background-color:  white;
+    width: 100%;
+    left: 0;
+  }
+
+  #contactForm {
+    display: grid;
+    margin: 0.2rem;
+    grid-gap: 0.5rem;
+  }
+
+  #emailContact,
+  #name,
+  #message {
+    background: linear-gradient(to right, #fff, lightskyblue );
+    padding: 0.2rem;
+    border-radius: 0.2rem;
+    color: black;
+    border: none;
+  }
+
+  i, #btn-contact, #x  {
+    color: #fff;
+    filter: drop-shadow(1px 2px 2px black);
+    border: none;
+  }
+
+  .socials, #btn-contact {
+    -webkit-transition: -webkit-transform 0.5s;
+    transition: transform 0.5s ease;
+  }
+  .socials {
+    font-size: larger;
+  }
+
+  #btn-contact:hover {
+    -webkit-transform:scale(1.05);
+    transform:scale(1.05);
+    background-color: darkblue;
+  }
+
+  .socials:hover {
+    -webkit-transform:scale(1.2);
+    transform:scale(1.2);
+  }
+
+  #card-Contact {
+    background-image: url(../Assets/endless.jpg);/*  Assets/endless.jpg top center no-repeat fixed padding-box content-box red; */
+    opacity: 0.8;
+    background-position: center;
+    border: 3px solid #333;
+    border-radius: 2rem;
+    margin: 18rem;
+   /*  padding: 2rem; */
+    box-shadow: 0 10px 15px, rgba(0, 0, 0, 0.8);
+  }
+
+  .title {
+    display: inline-flex;
+    flex-direction: row;
+  }
+
+  #cont {
+    overflow: hidden;
+  }
+  #logo{
+    transition: 2s;
+  }
+  #logo:hover{
+    transform: scale(1.1);
+  }

@@ -7,14 +7,14 @@ router
 .get("/", (req, res) => {
     /* console.log(req.session)
     console.log(req.session.id) */
-    req.sessionStore.get(req.session.id, (err, sessionData) => { //sessionStorage -could be vulnerable to script attacks-XSS/CSRF?
+    req.sessionStore.get(req.session.id, (err, sessionData) => { //sessionStorage -could be vulnerable to script attacks-XSS, CSRF?
         if(err){
             console.log(err)
             throw err;
         }
         /* console.log(sessionData); */
     })
-    req.session.visited = true;
+    req.session.visited = true; 
     res.cookie("hello", "world", { maxAge: 60000 , signed:true })
     res.status(201).send("Here you go, a freshly-baked 🍪! 👾");
     /* console.log(req.headers.cookie);

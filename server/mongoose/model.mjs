@@ -10,12 +10,10 @@ const ModelSchema = new Schema({
         type: String,
         enum: ["object", "scene", "abstract"],
         required: true,
-        unique: true,
     },
     imgUrl: {
         type: String,
         required: true,
-        unique: true,
     },
 
 

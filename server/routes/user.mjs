@@ -8,11 +8,11 @@ const router = Router();
 router
 .get(
     "/users",
-    query("filter")
+    /* query("filter")
         .notEmpty()
         .withMessage("Must not be empty")
         .isLength({ min: 5, max: 10})
-        .withMessage("Must be at least 5-10 characters"),
+        .withMessage("Must be at least 5-10 characters"), */
     async (req, res) => {
         console.log(req.session.id);
         console.log(req.session)
@@ -21,7 +21,9 @@ router
                 console.log(err)
                 throw err
             }
-            console.log(`Inside Session Store Get: ${sessionData}`)
+            console.log(req.cookies)
+            console.log(req.session)
+            console.log(req.headers)
         })
 	    try {
 	    	const data = await User.find();

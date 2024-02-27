@@ -5,13 +5,12 @@ const UserSchema = new Schema({
         type: String,
         required: true,
         unique: true,
-        min: [ 3, 'Name should be at least 3 characters' ],
+        min: [ 2, 'Name should be at least 2 characters' ],
         max: 25,
     },
     email: {
         type: String,
         required: true,
-        unique: true,
         validate: {
             validator: function(v) {
             return

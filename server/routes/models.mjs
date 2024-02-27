@@ -18,7 +18,6 @@ router
     console.log(title)
     try {
         const data = await Model.findOne({title})
-        console.log(data)
         res.status(200).send(data)
    }
    catch (error) {
@@ -58,14 +57,7 @@ router
         res.status(400).json({message: error.message})
     }
 })
-.get("/models", async(req, res) => {
-    try {
-        const data = await Model.find();
-        res.status(200).send(data)
-    } catch (err) {
-        res.status(500).json({message: err.message})
-    }
-})
+
 .delete("/models/:title", async(req, res) => {
     try {
         const title = req.params.title

@@ -4,13 +4,14 @@ import { createTokens, validateToken, authenticateToken, generateAccessToken } f
 import { User } from "../mongoose/user.mjs";
 import { comparePW } from "../utils/helpers.mjs";
 import jwt from "jsonwebtoken"
+import passport from "passport";
 
 let refreshTokens = []
 
 const router = Router();
 router
 // JWT_P
-.post('/signin', async (req, res) => {
+.post('/signin', passport.authenticate("local"), async (req, res) => {
     const { name, password } = req.body;
   // const user = await Users.findOne({ where: { username: username } });
     const user = await User.findOne({name})
@@ -20,23 +21,26 @@ router
     if (!comparePW(password, dbPassword)){
         res
         .status(400)
-        .json({ error: "Bad credentials!" })
+        .json({ error: "Invalid credentials!" })
     } else {
         const accessToken = createTokens(user);
         res.cookie("access-token", accessToken, {
           maxAge: 60000,
-          httpOnly: true, // hides your 🍪
+          httpOnly: true, // hides your 🍪 from browser
         });
-      res.json(`Hello there 👋🏼, it's nice to see you back ${user.name}!`);
+      res.json({ token: accessToken, username: name, id: user.id });
+      console.log(req.session)
     }
 })
 
-.get('/profile', validateToken, (res, req) => {
-  res.json("Logged in!");
+.get('/status', validateToken, (req, res) => {
+  res.json(req.user);
 })
 
-//jwt - WDS
-.get('/status', authenticateToken, (req, res) => {
+//jwt - WDS - Access/Refresh token
+.get('/stat', authenticateToken, (req, res) => {
+  console.log(req.user)
+  console.log(req.session)
   return req.user ? res.send(`Welcome, ${req.user.name} 👾!`) : res.sendStatus(401);
 })
 

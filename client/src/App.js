@@ -1,27 +1,39 @@
-import React, {useState} from 'react';
-import { BrowserRouter as Router, Routes, Route, Link, redirect, useNavigate } from 'react-router-dom';
-import {
-  faGoogle,
-  faYahoo,
-  faDiscord,
-} from "@fortawesome/free-brands-svg-icons"
-import Signin from './Signin';
-import Signup from './Signup';
-import Home from './Home';
-import Profile from './Profile';
-import './App.css';
+import { useRef, useState, createContext, useEffect } from 'react'
+import { IconButton, useColorMode } from "@chakra-ui/react";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Link, useLocation } from "wouter"//Route
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import {faGoogle, faYahoo, faDiscord} from "@fortawesome/free-brands-svg-icons"
+import {faSun, faMoon} from "@fortawesome/free-solid-svg-icons"
+import { AuthContext } from "./helpers/AuthContext.js"
+import Header from './components/Header.js'
+import Footer from './components/Footer.js'
+import Gallery from './Pages/Gallery.js'
+import Error from './Pages/Error.js'
+import About from './Pages/About.js'
+import Contact from './Pages/Contact.js'
+import Model from './Pages/Model.js'
+import Signin from './Pages/Signin.js';
+import Signup from './Pages/Signup.js';
+import Home from './Pages/Home.js';
+import Profile from './Pages/Profile.js';
 import axios from "axios";
-import { AuthContext } from "./helpers/AuthContext"
+import './App.css';
 
+export const ThemeContext = createContext(null);
 
-const accts = [
+export const route = axios.create({
+    baseURL: "http://localhost:3001" /* `${process.env.SERVER_URL}` */
+  });
+
+export const accts = [
   {
     icon: faGoogle,
     url: "https://www.google.com",
   },
   {
     icon: faDiscord,
-    url: "http://localhost:3001/discord",
+    url: "https://discord.com",
   },
   {
     icon: faYahoo,
@@ -29,67 +41,42 @@ const accts = [
   }
 ]
 
-function App() {
-  const [authState, setAuthState] = useState({
-    username: "",
-    id: 0,
-    status: false,
-  });
-  /* const navigate = useNavigate(); */
-
-  const route = axios.create({
-    baseURL: "http://localhost:3001"
-  });
-
-  const logout = async () => {
-    try {
-      await route.post("/logout")
-      .then((response) => {
-        console.log(response.data)
-        localStorage.removeItem("username");
-        setAuthState({ username: "", id: 0, status: false });
-      }).catch((error) => {
-        console.log(error);
-     });
-    } catch(error) {
-      console.log(error.message)
-    }
-  };
+export default function App() {
+    const [authState, setAuthState] = useState({
+        username: "",
+        id: 0,
+        status: false,
+      });
+    const { toggleColorMode, colorMode } = useColorMode()
   return (
-    <div className="App">
-      <AuthContext.Provider value={{ authState, setAuthState }}>
-        <Router>
-          <div className="navbar">
-            <div className="links">
-              {!authState.status ? (
-                <>
-                  <Link to="/">Home</Link>
-                  <Link to="/signin">Signin</Link>
-                  <Link to="/signup">Signup</Link>
-                </>
-              ) : (
-                <>
-                  <Link to="profile">Profile</Link>
-                </>
-              )}
-            </div>
-            <div className="loggedInContainer">
-              {/* <h1>{authState.username}</h1> */}
-              {authState.status && <Link to="/signin" onClick={logout}>Logout</Link>}
-            </div>
-          </div>
-        <main>
+    <AuthContext.Provider value={{ authState, setAuthState }}>
+      <Router>
+        <Header/>
         <Routes>
           <Route path="/" element={<Home/>} />
           <Route path="profile" element={<Profile/>} />
-          <Route path="signin" element={<Signin accts={accts}/>} />
-          <Route path="signup" element={<Signup accts={accts}/>} />
+          <Route path="signin" element={<Signin />} />
+          <Route path="signup" element={<Signup />} />
+          <Route path="gallery" element={<Gallery/>} />
+          <Route path="model" element={<Model/>} />
+          <Route path="contact" element={<Contact/>} />
+          <Route path="about" element={<About/>} />
+          <Route path="*" element={<Error/>} />
         </Routes>
-        </main>
-        </Router>
-      </AuthContext.Provider>
-    </div>
-  );
+        <Footer/>
+      </Router>
+      <IconButton
+      aria-label="toggle theme"
+      rounded="full"
+      fontSize="2xl"
+      position="fixed"
+      bottom={7}
+      right={5}
+      variant='ghost'
+      zIndex={1}
+      onClick={toggleColorMode} icon={colorMode === "dark" ? <FontAwesomeIcon className="icon" icon={faSun} color= "#FFD43B" /> : <FontAwesomeIcon className="icon" icon={faMoon}/>}
+      />
+    </AuthContext.Provider>
+  )
 }
 
-export default App;

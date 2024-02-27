@@ -2,7 +2,7 @@ export const userSchema = {
     name: {
         isLength: {
             options: {
-                min: 3,
+                min: 2,
                 max: 25,
             },
             errorMessage: "Must be at least 3-25 characters",

@@ -1,17 +1,36 @@
-import React from 'react';
+import React, {Suspense, createContext} from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
+import App from './App.js';
+import { Circle, Link, Image, ChakraProvider, extendTheme } from "@chakra-ui/react"
 import reportWebVitals from './reportWebVitals';
+import { switchTheme } from "./components/Switch.js";
+import './index.css';
+
+const theme = extendTheme({
+  components: {
+    Switch: switchTheme,
+  }
+});
+export const ThemeContext = createContext(null);
+
+function Overlay() {
+  return (
+    <div style={{ position: 'absolute', top: 0, left: 0, pointerEvents: 'none', width: '100%', height: '100%' }}>
+      <div className="link" style={{ position: 'absolute', bottom: 65, left: 150, fontSize: '1rem' }}>&copy; Bynd 2024</div>
+      <div style={{ position: 'absolute', bottom: 40, left: 40 }}>
+        <Link className="cont" boxShadow='dark-lg' to="/"><Image className='image' src="./Assets/bynd.png" alt="Logo" boxSize='80px' alignSelf="center"/></Link>
+      </div>
+    </div>
+  )
+}
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+  <ChakraProvider theme={theme}>
+    <Suspense fallback={null}>
+      <App />
+    </Suspense>
+  </ChakraProvider>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
