@@ -4,7 +4,6 @@ const ModelSchema = new Schema({
     title: {
         type: String,
         required: true,
-        unique: true,
     },
     type: {
         type: String,
@@ -15,6 +14,7 @@ const ModelSchema = new Schema({
         type: String,
         required: true,
     },
+    creator: { type: String }
 
 
 })

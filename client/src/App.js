@@ -10,7 +10,6 @@ import Header from './components/Header.js'
 import Footer from './components/Footer.js'
 import Gallery from './Pages/Gallery.js'
 import Error from './Pages/Error.js'
-import About from './Pages/About.js'
 import Contact from './Pages/Contact.js'
 import Model from './Pages/Model.js'
 import Signin from './Pages/Signin.js';
@@ -58,9 +57,8 @@ export default function App() {
           <Route path="signin" element={<Signin />} />
           <Route path="signup" element={<Signup />} />
           <Route path="gallery" element={<Gallery/>} />
-          <Route path="model" element={<Model/>} />
+          <Route path="model/:title" element={<Model/>} />
           <Route path="contact" element={<Contact/>} />
-          <Route path="about" element={<About/>} />
           <Route path="*" element={<Error/>} />
         </Routes>
         <Footer/>

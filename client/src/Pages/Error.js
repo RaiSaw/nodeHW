@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Container} from "@chakra-ui/react";
+import { Box, Container, Text} from "@chakra-ui/react";
 import "../App.css";
 
 const Error = () => {
@@ -20,7 +20,7 @@ const Error = () => {
       alignSelf='center'
       >
       <Container maxWidth="1280px">
-      <Text> 404 - Page Not Found </Text>
+      <Text as='h1'> 404 - Page Not Found </Text>
       </Container>
       </Box>
   )

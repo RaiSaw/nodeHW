@@ -20,73 +20,7 @@
     -moz-osx-font-smoothing: grayscale;
     overflow-y: overlay;
   }
-/*  */
 
-  .link2:hover{
-    color: inherit;
-    width: 100%;
-    left: 0;
-    transform: scale(1.1);
-    cursor: pointer;
-  }
-  .link2.active{
-    color: inherit;
-    width: 100%;
-    left: 0;
-    transform: scale(1.1);
-  }
-
-  .link3 {
-    display: inline-flex;
-    color: inherit;
-    text-decoration: none;
-    position: relative;
-  }
-  .link3:before {
-    color: inherit;
-    content: "";
-    position: absolute;
-    width: 0;
-    height: 1px;
-    left: 50%;
-    bottom: -3px;
-    transition: 0.3s;
-  }
-  .link3:hover::before {
-    background-color: #333;
-    width: 100%;
-    left: 0;
-    cursor:'pointer';
-  }
-  .link3.active{
-    color:#333;
-  }
-  .link3.active::before {
-    background-color:#fff;
-    width: 100%;
-    left: 0;
-  }
-
-  .col-10 img {
-    z-index: 1;
-  }
-  h3, small, .col-10 img {
-    filter: drop-shadow(1px 2px 2px black);
-    -webkit-transition: -webkit-transform 0.5s;
-    transition: transform 0.5s ease;
-  }
-  h3:hover, .col-10 img:hover{
-    -webkit-transform:scale(1.05);
-    transform:scale(1.05);
-  }
-
-  .icon{
-    width: 30px;
-    transition: 0.3s;
-  }
-  .icon a:hover{
-    transform: scale(1.5);
-  }
   /* Buttons */
 
   #search {
@@ -135,6 +69,59 @@
     -webkit-transform:scale(1.05);
     transform:scale(1.05);
   }
+  .submit {
+    cursor: pointer;
+    border-radius: 5em;
+    color: #fff;
+    background: linear-gradient(to right, #9c27b0,  #532dd1);
+    border: none;
+    width: 100%;
+    justify-self: center;
+    padding: 10px 40px;
+    font-family: "Ubuntu", sans-serif;
+    font-size: 13px;
+    box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
+  }/* Gallery */
+  p > .btn, .model-btn, .edit-btn {
+    -webkit-transition: -webkit-transform 0.5s;
+    transition: transform 0.5s ease;
+  }
+  p > .btn:hover, .model-btn:hover, .edit-btn:hover {
+    -webkit-transform:scale(1.05);
+    transform:scale(1.05);
+  }
+  .btn-gl{
+    display: inline-flex;
+    margin: 0.8rem;
+    position: relative;
+    line-height: 24px;
+  }
+  .btn-gl::before {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 1px;
+  left: 50%;
+  bottom: -3px;
+  transition: 0.3s;
+  }
+  .btn-gl:hover::before {
+  background-color:  black;
+  width: 100%;
+  left: 0;
+  }
+  .btn.gl:focus {
+  color: black;
+  }
+  .btn-gl:focus::before {
+  background-color:  black;
+  width: 100%;
+  left: 0;
+  }
+  .card-btn {
+    padding:0%;
+    margin-bottom:2px;
+  }
 
   /* Header */
 
@@ -175,15 +162,6 @@
   }
 
 /* Gallery */
-
-p > .btn, .model-btn, .edit-btn {
-  -webkit-transition: -webkit-transform 0.5s;
-  transition: transform 0.5s ease;
-}
-p > .btn:hover, .model-btn:hover, .edit-btn:hover {
-  -webkit-transform:scale(1.05);
-  transform:scale(1.05);
-}
 
 .carousel {
   margin-bottom: 4rem;
@@ -236,43 +214,6 @@ p > .btn:hover, .model-btn:hover, .edit-btn:hover {
   justify-self: center;
 }
 
-.img-3d {
-  -webkit-transition: -webkit-transform 2s;
-  transition: transform 2s ease-in-out;
-}
-.img-3d:hover{
-  -webkit-transform:scale(1.05);
-  transform: scale(1.05);
-}
-
-.btn-gl{
-  display: inline-flex;
-  margin: 0.8rem;
-  position: relative;
-  line-height: 24px;
-}
-.btn-gl::before {
-content: "";
-position: absolute;
-width: 0;
-height: 1px;
-left: 50%;
-bottom: -3px;
-transition: 0.3s;
-}
-.btn-gl:hover::before {
-background-color:  black;
-width: 100%;
-left: 0;
-}
-.btn.gl:focus {
-color: black;
-}
-.btn-gl:focus::before {
-background-color:  black;
-width: 100%;
-left: 0;
-}
 @media (min-width: 768px) {
   .bd-placeholder-img-lg {
     font-size: 3.5rem;
@@ -287,13 +228,7 @@ left: 0;
     line-height: 1.4;
   }
 }
-
-.card-btn {
-  padding:0%;
-  margin-bottom:2px;
-}
-
-.page-link{
+/* .page-link{
   color: blue;
   margin:16px auto;
 }
@@ -302,7 +237,7 @@ left: 0;
   border-color: blue;
   color: white;
 }
-
+ */
 /* Client Signin/-up */
 
 .cardMain {
@@ -362,19 +297,6 @@ form.form1 {
   border: 2px solid rgba(0, 0, 0, 0.18) !important;
 }
 
-.submit {
-  cursor: pointer;
-  border-radius: 5em;
-  color: #fff;
-  background: linear-gradient(to right, #9c27b0,  #532dd1);
-  border: none;
-  width: 100%;
-  justify-self: center;
-  padding: 10px 40px;
-  font-family: "Ubuntu", sans-serif;
-  font-size: 13px;
-  box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
-}
 
 .redi {
   text-shadow: 0px 0px 3px rgba(117, 117, 117, 0.12);
@@ -413,7 +335,7 @@ form.form1 {
 footer {
   box-shadow: 0px -1px 5px #fff;
 }
-
+/* Image/icons */
 .icon {
   filter: drop-shadow( 1px 1px 1px rgba(0, 0, 0, 0.4) );
 }
@@ -422,19 +344,109 @@ footer {
   overflow: hidden;
   border-radius: 20rem;
 }
-/* .logo{
-  transition: 2s;
-}
-.logo:hover{
-  transform: scale(1.1);
-}
 
-.imgCont{
-  overflow: hidden;
-} */
 .image{
   transition: 2s;
 }
 .image:hover{
   transform: scale(1.1);
+}
+.img-3d {
+  -webkit-transition: -webkit-transform 2s;
+  transition: transform 2s ease-in-out;
+}
+.img-3d:hover{
+  -webkit-transform:scale(1.05);
+  transform: scale(1.05);
+}
+.col-10 img {
+  z-index: 1;
+}
+h3, small, .col-10 img {
+  filter: drop-shadow(1px 2px 2px black);
+  -webkit-transition: -webkit-transform 0.5s;
+  transition: transform 0.5s ease;
+}
+h3:hover, .col-10 img:hover{
+  -webkit-transform:scale(1.05);
+  transform:scale(1.05);
+}
+
+.icon{
+  width: 30px;
+  transition: 0.3s;
+}
+.icon a:hover{
+  transform: scale(1.5);
+}
+/* Card */
+
+#contact-title {
+  text-transform: capitalize;
+  font-weight: bolder;
+  filter: drop-shadow(black 1px 1px 1px);
+}
+
+#contact-p, .label-contact{
+  font-weight:bold;
+  margin: 0.2rem;
+  filter: drop-shadow(black 1px 1px 1px);
+}
+
+
+#contactForm {
+  display: grid;
+  margin: 0.2rem;
+  grid-gap: 0.5rem;
+}
+
+#emailContact,
+#name,
+#message {
+  background: linear-gradient(to right, #fff, lightskyblue );
+  padding: 0.2rem;
+  border-radius: 0.2rem;
+  color: black;
+  border: none;
+}
+
+i, #btn-contact, #x  {
+  color: #fff;
+  filter: drop-shadow(1px 2px 2px black);
+  border: none;
+}
+
+.socials, #btn-contact {
+  -webkit-transition: -webkit-transform 0.5s;
+  transition: transform 0.5s ease;
+}
+.socials {
+  font-size: larger;
+}
+
+#btn-contact:hover {
+  -webkit-transform:scale(1.05);
+  transform:scale(1.05);
+  background-color: darkblue;
+}
+
+.socials:hover {
+  -webkit-transform:scale(1.2);
+  transform:scale(1.2);
+}
+
+#card-Contact {
+  background-image: url(./Assets/endless.jpg);
+  opacity: 0.8;
+  background-position: center;
+  border: 3px solid #333;
+  border-radius: 2rem;
+  margin: 18rem;
+ /*  padding: 2rem; */
+  box-shadow: 0 10px 15px, rgba(0, 0, 0, 0.8);
+}
+
+.title {
+  display: inline-flex;
+  flex-direction: row;
 }

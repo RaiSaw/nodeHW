@@ -25,7 +25,7 @@ router
     } else {
         const accessToken = createTokens(user);
         res.cookie("access-token", accessToken, {
-          maxAge: 60000,
+          maxAge: 60000 * 3,
           httpOnly: true, // hides your 🍪 from browser
         });
       res.json({ token: accessToken, username: name, id: user.id });
@@ -34,7 +34,7 @@ router
 })
 
 .get('/status', validateToken, (req, res) => {
-  res.json(req.user);
+  return req.user ? res.send(req.user) : res.sendStatus(401);
 })
 
 //jwt - WDS - Access/Refresh token

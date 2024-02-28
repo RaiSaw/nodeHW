@@ -1,7 +1,7 @@
 import React, {Suspense, createContext} from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App.js';
-import { Circle, Link, Image, ChakraProvider, extendTheme } from "@chakra-ui/react"
+import { Link, Image, ChakraProvider, extendTheme } from "@chakra-ui/react"
 import reportWebVitals from './reportWebVitals';
 import { switchTheme } from "./components/Switch.js";
 import './index.css';
@@ -23,7 +23,13 @@ function Overlay() {
     </div>
   )
 }
-
+export function SampleImages() {
+  return (
+    <div style={{ position: 'absolute', bottom: 0, left: 0, pointerEvents: 'none', width: '100%', height: '100%' }}>
+      _Sample images credit: unsplash.com/artstation.com
+    </div>
+  )
+}
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <ChakraProvider theme={theme}>

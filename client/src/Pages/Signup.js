@@ -43,16 +43,18 @@ function Signup() {
   };
   return (
     <>
-    <Flex /* py={20} height={730}  */align='center' justify='center'>
+    <Flex
+    align='center'
+    justify='center'
+    >
     <Box
-    className='login'
+    className='signup'
     as='section'
     color="#333"
     maxWidth="1280px"
     left={0}
     right={0}
     p={12}
-    rounded='xl'
     w={500}
     border= 'none'
     >

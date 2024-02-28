@@ -29,7 +29,7 @@ const Header = (theme) => {
           window.removeEventListener('scroll', handleScroll)
       }
   }, [])
-  let keysToRemove = ["accessToken", "username"];
+  let keysToRemove = ["accessToken", "username", "userId"];
 
   const logout = () => {
     keysToRemove.forEach(k =>
@@ -48,11 +48,10 @@ const Header = (theme) => {
       transitionDuration="0.3s"
       transitionTimingFunction="ease-in-out"
       zIndex={1}
-      /* boxShadow="2xl" */
     >
       <nav className="navbar navbar-expand-lg py-2">
       <div className="container-fluid">
-        <Link className="cont" to="/" ><Image className='image' src="./Assets/bynd.png" alt="Bynd Logo" boxSize="45px"/></Link>
+        <Link className="cont" to="/" ><Image className='image' src="Assets/bynd.png" alt="Bynd Logo" boxSize="45px"/></Link>
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>
@@ -66,7 +65,6 @@ const Header = (theme) => {
               </>
             ) : (
               <>
-                <Link className="link" to="/profile">Profile</Link>
                 <Link className="link" to="/gallery">Gallery</Link>
                 <Menu>
                   <MenuButton className='link'>
@@ -97,6 +95,7 @@ const Header = (theme) => {
                     </MenuList>
                 </Menu>
                 <Box className="loggedInContainer" justifyContent="flex-end" justifySelf="end">
+                  <Link className="link" to="/profile">Profile</Link>
                   {authState.status && <Link to="/" className="link" onClick={logout}>Logout</Link>}
                 </Box>
               </>

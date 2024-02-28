@@ -15,7 +15,6 @@ const Signin = () => {
   const [show, setShow] = useState(false)
   const handlePw = () => setShow(!show)
 
-
   const login = () => {
     const data = { name: username, password: password };
     if (!authState) {
@@ -29,8 +28,8 @@ const Signin = () => {
           navigate("/signin")
         } else {
           console.log(response.data)
-          localStorage.setItem("accessToken", response.data.token );
-          localStorage.setItem("username", response.data.username );
+          localStorage.setItem("accessToken", response.data.token)
+          localStorage.setItem("username", response.data.username)
           setAuthState({
             username: response.data.name,
             id: response.data.id,

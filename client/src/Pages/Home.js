@@ -1,54 +1,18 @@
 import React, {useState, useEffect, useContext, useRef}  from 'react'
-import Card from "../components/Cards"
 import "../App.css";
 import { OrbitControls,Float } from '@react-three/drei'
-import { Box, Button, HStack, } from "@chakra-ui/react";
-import { route } from '../App';
-import { Link, useNavigate } from "react-router-dom";
+import { Box, Button, HStack, Tooltip} from "@chakra-ui/react";
 import { AuthContext } from "../helpers/AuthContext";
 import * as THREE from 'three'
 import { Canvas, createPortal, useFrame, useThree } from '@react-three/fiber'
 import { useFBO, useGLTF, useScroll, Text, Image, Scroll, Preload, ScrollControls, MeshTransmissionMaterial } from '@react-three/drei'
 import { easing } from 'maath'
-
-const categories = [
-  {
-    getImageSrc: () => require("../Assets/Characters.png"),
-    title: "3D Models",
-    alt:"Character models collage"
-  },
-  {
-    getImageSrc: () => require("../Assets/Envi.png"),
-    title: "Environment and Scenes",
-    alt:"Environment and Scenes collage"
-  },
-  {
-    getImageSrc: () => require("../Assets/mater.png"),
-    title: "Texture, Materials and HDRIs",
-    alt:"Materials collage"
-  },
-]
+import { SampleImages } from '..';
 
 const Home = () => {
   const { authState } = useContext(AuthContext);
-  /* useEffect(() => {
-    const fetchPost = async () => {
-      if (!localStorage.getItem("accessToken") || (!authState)) {
-        navigate("/signin");
-      } else {
-        try {
-          let response = await route.get('/models');
-          setModels(response.data);
-        } catch (error) {
-          console.log(error);
-        }
-      }
-    }
-    fetchPost();
- }, []) */
-
   return (
-      <Canvas camera={{ position: [0, 0, 20], fov: 15 }} >
+    <Canvas camera={{ position: [0, 0, 20], fov: 15 }} >
       <ScrollControls damping={0.2} pages={3} distance={0.5}>
         <Lens>
           <Scroll>
@@ -56,6 +20,7 @@ const Home = () => {
             <Images />
           </Scroll>
           <Scroll html>
+          <SampleImages/>
             <Box style={{ transform: 'translate3d(65vw, 192vh, 0)' }}>
             <h5>
             From stunning visualizations to mind-bending designs,
@@ -70,16 +35,10 @@ const Home = () => {
             knows no bounds.
             </h5>
             <HStack spacing={8}>
-                <Button as='a' href='/signup' id="signup-btn" boxShadow='dark-lg' justifySelf="space-between" fontWeight='bold' fontSize={16} size={['sm','md','lg']} color='#fff' rounded='15px' border='blue' px="8">Sign up</Button>
-                <Button as='a' href='/login' id="login-btn" boxShadow='dark-lg' justifySelf="space-between" fontWeight='bold' fontSize={16} size={['sm','md','lg']} color="#fff" bg='#6c757d' rounded='15px' px="8" _hover={{bg:'#5c636a'}}>
+                <Button as='a' href='/signup' id="signup-btn" w="76%">Sign up</Button>
+                <Button as='a' href='/login' id="login-btn" w="76%">
                   Log in
                 </Button>
-                {/* <Button className="submit" w="76%" as="a" href="signin">
-          Sign in
-      </Button>
-      <Button className="submit" w="76%"  as="a" href="signup">
-          Sign up
-      </Button> */}
             </HStack>
             </Box>
           </Scroll>
@@ -151,17 +110,16 @@ function Images() {
   })
   return (
     <group ref={group}>
-      <Image position={[-2, 0, 0]} scale={[4, height, 1]} url='/assets/milad-fakurian-k4WPhf596b4-unsplash.jpg' />
-      <Image position={[2, 0, 3]} scale={3} url='/assets/birhat-jiyad-OMGORs5og5M-unsplash.jpg' />
-      <Image position={[-2.05, -height, 6]} scale={[1, 3, 1]} url='/assets/amr-taha-qJit4JqiYLU-unsplash.jpg' />
+      <Image position={[-2, 0, 0]} scale={[4, height, 1]} url='/assets/milad-fakurian-k4WPhf596b4-unsplash.jpg' alt="Image credit: unsplash.com"/>
+      <Image position={[2, 0, 3]} scale={3} url='/assets/birhat-jiyad-OMGORs5og5M-unsplash.jpg' alt="Image credit: unsplash.com"/>
+      <Image position={[-2.05, -height, 6]} scale={[1, 3, 1]} url='/assets/amr-taha-qJit4JqiYLU-unsplash.jpg' alt="Image credit: unsplash.com"/>
       <Image position={[-0.6, -height, 9]} scale={[1, 2, 1]} url='/assets/0176.png' />
-      <Image position={[0.75, -height, 10.5]} scale={1.5} url='/assets/rohit-choudhari-udrlQcvkckE-unsplash.jpg' />
-      <Image position={[0, -height * 1.5, 7.5]} scale={[1.5, 3, 1]} url='/assets/simonleeUnsplash2.jpg' />
-      <Image position={[0, -height * 2 - height / 4, 0]} scale={[width, height / 1.1, 1]} url='/assets/Characters2.png' />
+      <Image position={[0.75, -height, 10.5]} scale={1.5} url='/assets/rohit-choudhari-udrlQcvkckE-unsplash.jpg' alt="Image credit: unsplash.com"/>
+      <Image position={[0, -height * 1.5, 7.5]} scale={[1.5, 3, 1]} url='/assets/simonleeUnsplash2.jpg' alt="Image credit: unsplash.com"/>
+      <Image position={[0, -height * 2 - height / 4, 0]} scale={[width, height / 1.1, 1]} url='/assets/Characters2.png' alt="Image credit: artstation.com"/>
     </group>
   )
 }
-
 function Typography() {
   const state = useThree()
   const { width, height } = state.viewport.getCurrentViewport(state.camera, [0, 0, 12])

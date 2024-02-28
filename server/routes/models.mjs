@@ -19,6 +19,18 @@ router
     try {
         const data = await Model.findOne({title})
         res.status(200).send(data)
+        console.log(title)
+   }
+   catch (error) {
+       res.status(400).json({message: error.message})
+   }
+})
+
+.get("/:creator", async (req, res) => {
+    const {creator} = req.params
+    try {
+        const response = await Model.find({creator});
+        res.status(200).send(response)
    }
    catch (error) {
        res.status(400).json({message: error.message})

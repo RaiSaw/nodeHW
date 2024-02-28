@@ -1,65 +1,62 @@
-import React, {useState, useEffect, useContext} from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { AuthContext } from "../helpers/AuthContext";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { Card, Container, Text, SimpleGrid, VStack, Box, FormLabel, Input, FormControl, FormErrorMessage, Button } from "@chakra-ui/react";
+import { Card, Container, Text, SimpleGrid, Select, VStack, Box, FormLabel, Input, FormControl, FormErrorMessage, Button } from "@chakra-ui/react";
 import { route } from '../App';
 import { modelTypes } from './Gallery';
+import ModelCard from '../components/ModelCard'
 
 const Profile = () => {
-  let { id } = useParams();
   const [username, setUsername] = useState("");
   const { authState } = useContext(AuthContext);
-  const [users, setUsers] = useState([]);
   const [models, setModels] = useState([]);
-  const [listOfModels, setListOfModels] = useState([]);
   const navigate = useNavigate();
 
+  const user = localStorage.getItem("username")
+  let creator = user;
+
   useEffect(() => {
-      const fetchPost = async () => {
-        if (!localStorage.getItem("accessToken")) {
-          navigate("/signin");
-        } else {
-          try {
-            let response = await route.get(`/users/${id}`);
-            setUsername(response.data.username);
-          } catch (error) {
-            console.log(error);
-          }
-          try {
-            let response = await route.get('/models');
-            setModels(response.data);
-          } catch (error) {
-            console.log(error);
-          }
+    const fetchPost = async () => {
+      if (!localStorage.getItem("accessToken")) {
+        navigate("/signin");
+      } else {
+        try {
+          let id = authState.id
+          let response = await route.get(`/users/${id}`);
+          setUsername(response.data.name);
+        } catch (error) {
+          console.log(error);
         }
       }
-      fetchPost();
+    }
+    const fetchModels = async () => {
+      if (!localStorage.getItem("accessToken")) {
+        navigate("/signin");
+      } else {
+      try {
+        let response = await route.get(`/${creator}`);
+        setModels(response.data);
+        console.log(response.data)
+      } catch (error) {
+        console.log(error);
+      }
+      }
+    }
+    fetchPost()
+    fetchModels()
    }, [])
 
-   const deleteModel = async (title) => {
-    try {
-      await route.delete(`/models/${title}`);
-      setModels(
-         models.filter((mod) => {
-            return mod.title !== title;
-         })
-      );
-    } catch (error) {
-      console.log(error);
-   }
- };
  // ADD model
  const [newModel, setNewModel] = useState({
   imgUrl: '',
   title: '',
   type: '',
+  creator: user
 });
 // Image sample
-
 const img = 'Assets/simonleeUnsplash.jpg'
-
 // Create a new item object
-const newObject = { title: newModel.title, type: newModel.type, imgUrl: newModel.imgUrl ?? img};
+const newObject = { title: newModel.title, type: newModel.type, imgUrl: newModel.imgUrl ?? img, creator: user ?? localStorage.getItem("username") };
 // POST Request
 const postData = async () => {
   const postResponse = await route.post("/models",
@@ -75,19 +72,18 @@ const postData = async () => {
       console.log(response.data.error);
     } else {
       setModels([postResponse.data, ...models])
-      setFilters([postResponse.data, ...models])
+      console.log("Model added!")
     }
   })
   .catch((error) => {
       console.log(error);
   });
 }
-
 // Handle submit
 const handleAddModel = () => {
-  /* e.preventDefault() */
   // Update the state with the new item
   postData([...models, newObject])
+  alert("Thanks for creating a new model!")
   // Clear the input fields
   setNewModel({
     imgUrl: '',
@@ -101,43 +97,40 @@ const handleChange = (e) => {
   const { name, value } = e.target;
   setNewModel({ ...newModel, [name]:value });
 };
-//validation-blur
+
 const [itemBlur, setBlur]= useState(false)
 const handleBlur = () => {
   setBlur(true)
 }
 
   return (
-    <Container my="1rem">
-      <Box>
-        <Text>{username}</Text>
-      </Box>
-      <Text as="h1">All Models</Text>
+    <Box my="4rem" justifyContent="center">
+      <VStack justifyContent="start">
+      <Text as="h2" mb='2rem'>Your Models: {username}</Text>
       <SimpleGrid
-        gridTemplateColumns="repeat(4,minmax(100px,1fr))"
-        gridGap={4}
-        justifyContent='center'
+      gridTemplateColumns="repeat(5,minmax(200px,1fr))"
+      columns={{ md:2, lg:3, xl:4 }}
+      gridGap={4}
+      justifyContent='center'
       >
-        {models.map((mod) => (
-          <Card
-          key={mod.id}
-          className='mainCard'
-          >
-            <VStack justifyContent='center'>
-            <Text>Title: {mod.title}</Text>
-            <Text>Type: {mod.type}</Text>
-            <Button className="submit" ml='-9' onClick={() => deleteModel(mod.title)}>Delete</Button>
-            </VStack>
-          </Card>
+        {models.map((model) => (
+          <ModelCard
+          key={model.title}
+          id={model.id}
+          title={model.title}
+          type={model.type}
+          imgUrl={model.imgUrl}
+          creator={model.creator}
+          />
         ))}
       </SimpleGrid>
-      <Container my='24' justifyContent='center' textAlign='center'>
+      <Container my='12' justifyContent='center' textAlign='center'>
           <Card p='4' boxShadow='2xl'>
             <Text as='h4'>Add New Model</Text>
             <form onSubmit={handleAddModel}>
               <VStack alignItems='start'>
-              <FormControl isInvalid={itemBlur && newModel.title === ""} isRequired>
-                <FormLabel htmlFor="title">Title</FormLabel>
+              <FormControl isInvalid={itemBlur && newModel.title === ""}>
+                <FormLabel htmlFor="title">Title:</FormLabel>
                 <Input
                 id="title"
                 type="text"
@@ -151,14 +144,31 @@ const handleBlur = () => {
                 <FormErrorMessage>Please type a title</FormErrorMessage>
                 }
               </FormControl>
-              <FormControl isInvalid={false} isRequired>
+              <FormControl isInvalid={itemBlur && newModel.type === ""} >
                 <FormLabel htmlFor="type">Type:</FormLabel>
-                <Select id="type" type="type" name="type" value={newModel.type} onChange={handleChange}     placeholder='Select a model type'>
+                <Select id="type" type="type" name="type" value={newModel.type} onChange={handleChange}  placeholder='Select a model type'>
                 {modelTypes.map((type) => (
                     <option key={type.id}>{type.type}</option>
                   ))}
                 </Select>
-                <FormErrorMessage></FormErrorMessage>
+                {handleBlur &&
+                <FormErrorMessage>Please select a model type</FormErrorMessage>
+                }
+              </FormControl>
+              <FormControl isInvalid={itemBlur && newModel.imgUrl === ""}>
+                <FormLabel htmlFor="title">Model:</FormLabel>
+                <Input
+                id="imgUrl"
+                type="text"
+                name="imgUrl"
+                value={newModel.imgUrl}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                placeholder='Enter a model file'
+                />
+                {handleBlur &&
+                <FormErrorMessage>Please upload a 3D model</FormErrorMessage>
+                }
               </FormControl>
               <Button alignSelf='center' className='model-btn' my='2' type="submit">
                 Submit Model
@@ -167,7 +177,8 @@ const handleBlur = () => {
             </form>
           </Card>
         </Container>
-    </Container>
+        </VStack>
+    </Box>
   );
 }
 

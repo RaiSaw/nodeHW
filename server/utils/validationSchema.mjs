@@ -57,4 +57,10 @@ export const modelSchema = {
             errorMessage: "Must not be empty",
         },
     },
+    creator: {
+        notEmpty: {
+            errorMessage: "Must not be empty",
+        },
+        isString: true,
+    },
 };
