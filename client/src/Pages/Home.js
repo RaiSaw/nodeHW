@@ -1,7 +1,6 @@
-import React, {useState, useEffect, useContext, useRef}  from 'react'
+import React, {useState, useContext, useRef}  from 'react'
 import "../App.css";
-import { OrbitControls,Float } from '@react-three/drei'
-import { Box, Button, HStack, Tooltip} from "@chakra-ui/react";
+import { Box, Button, HStack } from "@chakra-ui/react";
 import { AuthContext } from "../helpers/AuthContext";
 import * as THREE from 'three'
 import { Canvas, createPortal, useFrame, useThree } from '@react-three/fiber'
@@ -35,8 +34,8 @@ const Home = () => {
             knows no bounds.
             </h5>
             <HStack spacing={8}>
-                <Button as='a' href='/signup' className='submit' variant="button" w="76%">Sign up</Button>
-                <Button as='a' href='/login' className="submit" w="76%">
+                <Button as='a' href='/signup' className='submit' variant="button" w="50%">Sign up</Button>
+                <Button as='a' href='/login' className="submit" w="50%">
                   Sign in
                 </Button>
             </HStack>

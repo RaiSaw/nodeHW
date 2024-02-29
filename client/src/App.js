@@ -1,7 +1,8 @@
 import dotenv from 'dotenv'
-import 'dotenv/config'
-import {} from 'dotenv/config'
-import { useRef, useState, createContext, useEffect } from 'react'
+dotenv.config()
+/* import 'dotenv/config' */
+/* import {} from 'dotenv/config' */
+import { useState, createContext } from 'react'
 import { IconButton, useColorMode } from "@chakra-ui/react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
@@ -26,6 +27,7 @@ export const ThemeContext = createContext(null);
 export const route = axios.create({
     baseURL: `${process.env.SERVER_URL}`
   });
+console.log(`${process.env.SERVER_URL}`)
 
 export const accts = [
   {
