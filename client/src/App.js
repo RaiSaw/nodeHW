@@ -1,4 +1,6 @@
-import "./env.mjs"
+import dotenv from 'dotenv'
+import 'dotenv/config'
+import {} from 'dotenv/config'
 import { useRef, useState, createContext, useEffect } from 'react'
 import { IconButton, useColorMode } from "@chakra-ui/react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
