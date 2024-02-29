@@ -1,5 +1,5 @@
 import { switchAnatomy } from '@chakra-ui/anatomy'
-import { createMultiStyleConfigHelpers, defineStyle } from '@chakra-ui/react'
+import { createMultiStyleConfigHelpers, defineStyle, defineStyleConfig } from '@chakra-ui/react'
 
 const { definePartsStyle, defineMultiStyleConfig } =
   createMultiStyleConfigHelpers(switchAnatomy.keys)
@@ -44,3 +44,16 @@ const boxy = definePartsStyle({
 })
 
 export const switchTheme = defineMultiStyleConfig({ baseStyle, variants: { boxy }})
+
+const button = defineStyle({
+  background: 'blue.700',
+  // let's also provide dark mode alternatives
+  _dark: {
+    bg: 'blue.500',
+    /* color: 'orange.800', */
+  }
+})
+
+export const buttonTheme = defineStyleConfig({
+  variants: { button },
+})

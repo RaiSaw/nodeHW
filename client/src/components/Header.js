@@ -48,10 +48,11 @@ const Header = (theme) => {
       transitionDuration="0.3s"
       transitionTimingFunction="ease-in-out"
       zIndex={1}
+      boxShadow="2xl"
     >
       <nav className="navbar navbar-expand-lg py-2">
       <div className="container-fluid">
-        <Link className="cont" to="/" ><Image className='image' src="Assets/bynd.png" alt="Bynd Logo" boxSize="45px"/></Link>
+        <Link className="cont" to="/" ><Image className='image' src="../Assets/bynd.png" alt="Bynd Logo" boxSize="45px"/></Link>
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>

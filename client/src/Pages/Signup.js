@@ -118,7 +118,7 @@ function Signup() {
                   </InputGroup>
                   <FormErrorMessage className="errorMessage">{errors.password}</FormErrorMessage>
                 </FormControl>
-                <Button type="submit" className="submit">
+                <Button type="submit" variant="button" className="submit">
                   Sign up
                 </Button>
             </Form>

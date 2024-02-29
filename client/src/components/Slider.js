@@ -1,7 +1,6 @@
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
-import { useState } from "react";
-import { Box, Text, Image} from "@chakra-ui/react";
+import { Box, Text, Image, Button } from "@chakra-ui/react";
 import '../App.css'
 
 function Slider(props) {
@@ -22,7 +21,7 @@ function Slider(props) {
             <div className="carousel-caption text-start">
               <Text as='h3' mb={4}>{carousel.title}</Text>
               <Text as='h3' mb={6} fontSize={['14','16','20']}className="opacity-75">{carousel.description}</Text>
-              <p><a className="btn btn-lg btn-primary" id="carousel-btn" href="/">Learn more</a></p>
+              <Button className="submit" variant="button" href="/" w="20%">Learn more</Button>
             </div>
           </div>
         </div>

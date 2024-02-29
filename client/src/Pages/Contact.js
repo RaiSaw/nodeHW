@@ -21,8 +21,14 @@ const Contact = () => {
         <Card
         className="cardMain"
         bg='url("./Assets/endless.jpg") center/cover no-repeat'
+        filter='auto'
+        invert='8%'
+        boxShadow='dark-lg'
+        textShadow='0 0 0.7em #fff;'
+        justifyContent="center"
+        justifyItems="center"
         >
-          <HStack my="4" justifyContent="space-between">
+          <HStack my="3" px="4" justifyContent="space-between">
           <HStack>
             <Text as="h5" my="1" id='contact-title'>Contact us</Text>
             <i className="fa-solid fa-envelope"></i>
@@ -42,7 +48,9 @@ const Contact = () => {
           <Input mb="1rem"className="username" type="text" id="name" name="name" placeholder="Enter your name" required />
           <Input mb="1rem" className="email" type="email" id="emailContact" name="email" placeholder="Enter your email" required />
           <Textarea mb="1rem" className="password" id="message" name="message" rows="4" placeholder="Enter your message" required></Textarea>
-          <Button id="btn-contact" type="submit" className="btn btn-primary px-4 m-2 me-md-2 fw-bold justify-self-center" style={{backgroundColor: 'blue'}}>Submit</Button>
+          <Flex justifyContent="center">
+          <Button className="submit" variant="button" type="submit" >Submit</Button>
+          </Flex>
         </form>
         <Box className="space-x-8 my-6 flex justify-center">
           <Link className="socials" href="linkedin.com"><i className="fa-brands fa-linkedin"></i></Link>

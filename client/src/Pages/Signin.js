@@ -98,7 +98,7 @@ const Signin = () => {
         </IconButton>
         </InputRightElement>
         </InputGroup>
-        <Button className="submit" onClick={login}>
+        <Button className="submit" variant="button" onClick={login}>
           Sign in
         </Button>
       </form>

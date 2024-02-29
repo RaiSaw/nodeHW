@@ -22,58 +22,11 @@
   }
 
   /* Buttons */
-
-  #search {
-    border: 1px solid blue;
-    color: blue;
-    -webkit-transition: -webkit-transform 0.5s;
-    transition: transform 0.5s ease;
-  }
-  #search:hover {
-    background-color: blue;
-    color: #fff;
-    -webkit-transform:scale(1.05);
-    transform:scale(1.05);
-  }
-
-  #signup-btn, #gallery-btn, #carousel-btn{
-    background-color: blue;
-    -webkit-transition: -webkit-transform 0.5s;
-    transition: transform 0.5s ease;
-    border: none;
-    color:#fff;
-  }
-  #signup-btn:hover, #gallery-btn:hover, #carousel-btn:hover  {
-    -webkit-transform:scale(1.05);
-    transform:scale(1.05);
-    background-color: mediumblue;
-  }
-
-  #login-btn {
-    color: "#6c757d";
-    -webkit-transition: -webkit-transform 0.5s;
-    transition: transform 0.5s ease;
-  }
-  #login-btn:hover {
-    color: #fff;
-    background: "#6c757d";
-    -webkit-transform:scale(1.05);
-    transform:scale(1.05);
-  }
-
-  #login-btn2 {
-    -webkit-transition: -webkit-transform 0.5s;
-    transition: transform 0.5s ease;
-  }
-  #login-btn2:hover {
-    -webkit-transform:scale(1.05);
-    transform:scale(1.05);
-  }
   .submit {
     cursor: pointer;
     border-radius: 5em;
     color: #fff;
-    background: linear-gradient(to right, #9c27b0,  #532dd1);
+    background: linear-gradient(to right, rgb(28, 28, 201),  #532dd1);
     border: none;
     width: 100%;
     justify-self: center;
@@ -81,15 +34,38 @@
     font-family: "Ubuntu", sans-serif;
     font-size: 13px;
     box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
-  }/* Gallery */
-  p > .btn, .model-btn, .edit-btn {
     -webkit-transition: -webkit-transform 0.5s;
     transition: transform 0.5s ease;
   }
-  p > .btn:hover, .model-btn:hover, .edit-btn:hover {
+  /* Gallery */
+
+  .submit:hover, .signup-btn:hover, #gallery-btn:hover, .carousel-btn:hover, #btn-contact:hover, #search:hover  {
+    -webkit-transform:scale(1.05);
+    transform:scale(1.05);
+    background-color: mediumblue;
+  }
+
+  .login-btn {
+    color: "#6c757d";
+    -webkit-transition: -webkit-transform 0.5s;
+    transition: transform 0.5s ease;
+  }
+  .login-btn:hover {
+    color: #fff;
+    background: "#6c757d";
     -webkit-transform:scale(1.05);
     transform:scale(1.05);
   }
+
+  p > .btn, .model-btn, .edit-btn, #login-btn2 {
+    -webkit-transition: -webkit-transform 0.5s;
+    transition: transform 0.5s ease;
+  }
+  p > .btn:hover, .model-btn:hover, .edit-btn:hover, #login-btn2:hover  {
+    -webkit-transform:scale(1.05);
+    transform:scale(1.05);
+  }
+
   .btn-gl{
     display: inline-flex;
     margin: 0.8rem;
@@ -122,7 +98,6 @@
     padding:0%;
     margin-bottom:2px;
   }
-
   /* Header */
 
   .link {
@@ -228,16 +203,7 @@
     line-height: 1.4;
   }
 }
-/* .page-link{
-  color: blue;
-  margin:16px auto;
-}
-#active {
-  background: blue;
-  border-color: blue;
-  color: white;
-}
- */
+
 /* Client Signin/-up */
 
 .cardMain {
@@ -254,7 +220,7 @@ form.form1 {
   justify-items: center;
   align-content: center;
   justify-content: center;
-  padding: 0 3rem;
+  padding: 0 2rem;
 }
 
 .eye {
@@ -297,10 +263,8 @@ form.form1 {
   border: 2px solid rgba(0, 0, 0, 0.18) !important;
 }
 
-
 .redi {
   text-shadow: 0px 0px 3px rgba(117, 117, 117, 0.12);
-  color: #9c27b0;
   margin-top: 1rem;
 }
 
@@ -336,50 +300,48 @@ footer {
   box-shadow: 0px -1px 5px #fff;
 }
 /* Image/icons */
-.icon {
-  filter: drop-shadow( 1px 1px 1px rgba(0, 0, 0, 0.4) );
-}
 
 .cont {
   overflow: hidden;
   border-radius: 20rem;
 }
 
-.image{
-  transition: 2s;
-}
-.image:hover{
-  transform: scale(1.1);
-}
-.img-3d {
+
+#img-3d, .image {
   -webkit-transition: -webkit-transform 2s;
   transition: transform 2s ease-in-out;
 }
-.img-3d:hover{
+
+#img-3d:hover, .image:hover{
   -webkit-transform:scale(1.05);
   transform: scale(1.05);
-}
-.col-10 img {
-  z-index: 1;
-}
-h3, small, .col-10 img {
-  filter: drop-shadow(1px 2px 2px black);
-  -webkit-transition: -webkit-transform 0.5s;
-  transition: transform 0.5s ease;
-}
-h3:hover, .col-10 img:hover{
-  -webkit-transform:scale(1.05);
-  transform:scale(1.05);
 }
 
 .icon{
   width: 30px;
   transition: 0.3s;
+  filter: drop-shadow( 1px 1px 1px rgba(0, 0, 0, 0.4) );
 }
-.icon a:hover{
-  transform: scale(1.5);
+
+.socials{
+  -webkit-transition: -webkit-transform 0.5s;
+  transition: transform 0.5s ease;
 }
-/* Card */
+.socials {
+  font-size: larger;
+}
+
+.socials:hover, .icon a:hover {
+  -webkit-transform:scale(1.2);
+  transform:scale(1.2);
+}
+
+i, #btn-contact, #x  {
+  color: #fff;
+  filter: drop-shadow(1px 2px 2px black);
+  border: none;
+}
+/* Contact */
 
 #contact-title {
   text-transform: capitalize;
@@ -388,16 +350,9 @@ h3:hover, .col-10 img:hover{
 }
 
 #contact-p, .label-contact{
-  font-weight:bold;
-  margin: 0.2rem;
+  font-weight: 500;
+  margin: 1rem;
   filter: drop-shadow(black 1px 1px 1px);
-}
-
-
-#contactForm {
-  display: grid;
-  margin: 0.2rem;
-  grid-gap: 0.5rem;
 }
 
 #emailContact,
@@ -408,45 +363,4 @@ h3:hover, .col-10 img:hover{
   border-radius: 0.2rem;
   color: black;
   border: none;
-}
-
-i, #btn-contact, #x  {
-  color: #fff;
-  filter: drop-shadow(1px 2px 2px black);
-  border: none;
-}
-
-.socials, #btn-contact {
-  -webkit-transition: -webkit-transform 0.5s;
-  transition: transform 0.5s ease;
-}
-.socials {
-  font-size: larger;
-}
-
-#btn-contact:hover {
-  -webkit-transform:scale(1.05);
-  transform:scale(1.05);
-  background-color: darkblue;
-}
-
-.socials:hover {
-  -webkit-transform:scale(1.2);
-  transform:scale(1.2);
-}
-
-#card-Contact {
-  background-image: url(./Assets/endless.jpg);
-  opacity: 0.8;
-  background-position: center;
-  border: 3px solid #333;
-  border-radius: 2rem;
-  margin: 18rem;
- /*  padding: 2rem; */
-  box-shadow: 0 10px 15px, rgba(0, 0, 0, 0.8);
-}
-
-.title {
-  display: inline-flex;
-  flex-direction: row;
 }

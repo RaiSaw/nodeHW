@@ -8,7 +8,7 @@ export default class Footer extends Component {
     return (
       <footer className="footer d-flex flex-row flex-wrap justify-content-between align-items-center py-2 px-3">
         <div className="col d-flex space-x-4 align-items-center" >
-          <Link className="cont" to="/"><Image className='image' src="Assets/bynd.png" alt="Logo" boxSize='80px' alignSelf="center"/></Link>
+          <Link className="cont" to="/"><Image className='image' src="../Assets/bynd.png" alt="Logo" boxSize='80px' alignSelf="center"/></Link>
           <span className="align-self-center">&copy; Bynd 2024</span>
         </div>
       </footer>

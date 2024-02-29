@@ -1,22 +1,10 @@
 import { Box, Tooltip, IconButton, Text, VStack, CardBody, Card, Button, useColorModeValue, Flex, ButtonGroup, useEditableControls, EditablePreview, Editable, EditableInput, Input, Select, useDisclosure, FormLabel, ModalOverlay, Modal, ModalContent, ModalHeader, ModalCloseButton, ModalBody, FormControl, ModalFooter } from "@chakra-ui/react";
-import { CheckIcon, CloseIcon } from '@chakra-ui/icons'
 import React, { useRef, useContext } from "react";
 import {motion} from 'framer-motion'
-import { defineStyle } from '@chakra-ui/react'
+
 import { redirect, useNavigate, useParams } from "react-router-dom";
 import '../App.css'
 
-export const style = defineStyle({
-  mb: '2',
-  borderRadius: 'xl',
-  fontWeight: 'semibold',
-  color: 'white',
-  fontSize: {
-    md: '8',
-    lg:'10',
-  },
-  textShadow: '1px 1px 1px mediumblue',
-})
 
 const ModelCard = ({title, imgUrl, type,  id, creator }) => {
   const navigate = useNavigate();

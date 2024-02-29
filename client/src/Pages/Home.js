@@ -35,9 +35,9 @@ const Home = () => {
             knows no bounds.
             </h5>
             <HStack spacing={8}>
-                <Button as='a' href='/signup' id="signup-btn" w="76%">Sign up</Button>
-                <Button as='a' href='/login' id="login-btn" w="76%">
-                  Log in
+                <Button as='a' href='/signup' className='submit' variant="button" w="76%">Sign up</Button>
+                <Button as='a' href='/login' className="submit" w="76%">
+                  Sign in
                 </Button>
             </HStack>
             </Box>

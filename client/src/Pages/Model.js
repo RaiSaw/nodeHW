@@ -48,15 +48,38 @@ const Model = () => {
   //EDIT model data
 const [newTitle, setNewTitle] = useState(model.title)
 const [edit, setEdit] = useState(model.type)
-
-
-const handleInput = (e) => {
-  setEdit({...edit, [e.target.name]: e.target.value})
-}
-/* title: model.title,
+const [patch, setPatch] = useState({
+  title: model.title,
   type: model.type,
   imgUrl: model.imgUrl,
-  creator: model.creator ?? username */
+  creator: model.creator ?? username
+})
+
+const handleInput = (e) => {
+  setPatch({...patch, [e.target.name]: e.target.value})
+}
+const onSubmit = async (title) => {
+  try {
+    const getResponse = await route.patch(`/models/${title}`,
+    {
+      title: patch.title,
+      type: patch.type,
+      imgUrl: patch.imgUrl,
+      creator: patch.creator
+
+    },
+    {
+      headers: { accessToken: localStorage.getItem("accessToken") },
+    }
+    )
+    console.log("Model added!")
+    alert("Model added!")
+    setModel([getResponse.data, ...model])
+    navigate("/profile")
+  } catch (err) {
+      console.log(`Error: ${err.emssage}`)
+  }
+}
 
 const handleTitle = async (title) => {
   try {
@@ -99,9 +122,8 @@ const handleType = async (title) => {
     });
       console.log("Model deleted!")
       setModel(model.filter((mod) => mod.title !== title))
-      setInterval(() => {
-        navigate("/profile")
-      }, 5000);
+      alert("Model added!")
+      navigate("/profile")
   } catch (error) {
     console.log(error);
  }
@@ -129,6 +151,7 @@ const handleType = async (title) => {
       invert='8%'
       fontFamily={'Poppins'}
       fontWeight='bold'
+      id="img-3d"
       >
         <CardBody pt={16} pb={4} >
           <VStack pt={16} alignItems='flex-start' color='white' h='100%' justifyContent='flex-end' fontSize={['8','9','11']}>
@@ -138,7 +161,6 @@ const handleType = async (title) => {
           isPreviewFocusable={true}
           selectAllOnFocus={false}
           onSubmit={handleTitle}
-          value={newTitle}
           onChange={(newValue) => setNewTitle(newValue)}
           >
           <Tooltip label="Click to edit" shouldWrapChildren={true}>
@@ -161,7 +183,6 @@ const handleType = async (title) => {
           selectAllOnFocus={false}
           defaultValue={model.type}
           fontSize='sm'
-          value={edit}
           onSubmit={handleType}
           onChange={(newValue) => setEdit(newValue)}
           >
@@ -195,17 +216,18 @@ const handleType = async (title) => {
       >
         <ModalOverlay />
         <ModalContent>
+        <form onSubmit={onSubmit}>
           <ModalHeader>Edit model</ModalHeader>
           <ModalCloseButton />
           <ModalBody pb={6}>
             <FormControl>
               <FormLabel>Title</FormLabel>
-              <Input id="title" type="text" name="title" ref={initialRef} defaultValue={model.title}/>
+              <Input id="title" type="text" name="title" ref={initialRef} defaultValue={model.title} onChange={handleInput}/>
             </FormControl>
 
             <FormControl mt={4}>
               <FormLabel>Type</FormLabel>
-              <Select id="type" type="type" name="type" defaultValue={model.type}>
+              <Select id="type" type="type" name="type" defaultValue={model.type} onChange={handleInput}>
               {modelTypes.map((type) => (
                 <option key={type.id}>{type.type}</option>
               ))}
@@ -213,16 +235,17 @@ const handleType = async (title) => {
             </FormControl>
             <FormControl>
               <FormLabel>File</FormLabel>
-              <Input id="imgUrl" type="text" name="imgUrl" ref={initialRef} defaultValue={model.imgUrl}/>
+              <Input id="imgUrl" type="text" name="imgUrl" ref={initialRef} defaultValue={model.imgUrl} onChange={handleInput}/>
             </FormControl>
 
           </ModalBody>
           <ModalFooter>
-            <Button id="signup-btn" mr={3}>
+            <Button className='submit' type="submit" variant="100%" w="20%" mr={3}>
               Save
             </Button>
             <Button className="edit-btn"onClick={onClose}>Cancel</Button>
           </ModalFooter>
+          </form>
         </ModalContent>
       </Modal>
       </VStack>
@@ -230,12 +253,12 @@ const handleType = async (title) => {
       </Card>
       {model.creator ?
         (
-          <Flex my="2" justifyContent='center' border="2px solid" borderRadius="0 1rem">
-              <Button className='edit-btn' m='2' onClick={onOpen}>Edit</Button>
-              <Button className='edit-btn' m='2' onClick={() => deleteModel(title)}>Remove</Button>
+          <Flex mt="4" justifyContent='center' border="2px solid" borderRadius="0 1rem">
+            <Button className='submit' w="25%" variant="button" m='2' onClick={onOpen}>Edit</Button>
+            <Button className='edit-btn' m='2' onClick={() => deleteModel(title)}>Remove</Button>
             </Flex>
         ):(
-          <Flex justifyContent="center" my="2" border="2px solid" borderRadius="0 1rem">
+          <Flex justifyContent="center" mt="4" border="2px solid" borderRadius="0 1rem">
             <VStack p={4}>
             <Text textShadow="1px 1px 1px white">{model.title}</Text>
             <Text textShadow="1px 1px 1px white"t>{model.type}</Text>

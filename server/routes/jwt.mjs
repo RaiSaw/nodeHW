@@ -25,7 +25,7 @@ router
     } else {
         const accessToken = createTokens(user);
         res.cookie("access-token", accessToken, {
-          maxAge: 60000 * 3,
+          maxAge: 60000 * 5,
           httpOnly: true, // hides your 🍪 from browser
         });
       res.json({ token: accessToken, username: name, id: user.id });

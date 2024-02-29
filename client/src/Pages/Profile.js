@@ -128,7 +128,7 @@ const handleBlur = () => {
           <Card p='4' boxShadow='2xl'>
             <Text as='h4'>Add New Model</Text>
             <form onSubmit={handleAddModel}>
-              <VStack alignItems='start'>
+              <VStack alignItems='start' px="6">
               <FormControl isInvalid={itemBlur && newModel.title === ""}>
                 <FormLabel htmlFor="title">Title:</FormLabel>
                 <Input
@@ -170,7 +170,7 @@ const handleBlur = () => {
                 <FormErrorMessage>Please upload a 3D model</FormErrorMessage>
                 }
               </FormControl>
-              <Button alignSelf='center' className='model-btn' my='2' type="submit">
+              <Button alignSelf='center' className='submit' my='2' w="50%" variant="button" type="submit">
                 Submit Model
               </Button>
               </VStack>
