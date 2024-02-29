@@ -28,7 +28,7 @@ const app = express();
         allowedHeaders: ['Content-Type', 'Authorization'],
         origin: ['http://localhost:3000']
     }) */)
-    app.use(express.static('public'))
+    /* app.use(express.static('public')) */
     app.use(cookieParser("CookieMonster"));  // for signed cookies to work- any str value- cookie's still visible, but has a signature, so it can detect if the client modified the cookie/hijacked a session
 // Sessions
 // each session maps to > own user > virtual cart > any session data can be attached to session object

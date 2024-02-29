@@ -1,7 +1,4 @@
-import dotenv from 'dotenv'
-dotenv.config()
-/* import 'dotenv/config' */
-/* import {} from 'dotenv/config' */
+import './env.js'
 import { useState, createContext } from 'react'
 import { IconButton, useColorMode } from "@chakra-ui/react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -27,8 +24,9 @@ export const ThemeContext = createContext(null);
 export const route = axios.create({
     baseURL: `${process.env.SERVER_URL}`
   });
-console.log(`${process.env.SERVER_URL}`)
 
+/* console.log(process.env.SERVER_URL)
+ */
 export const accts = [
   {
     icon: faGoogle,

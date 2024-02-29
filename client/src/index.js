@@ -5,6 +5,11 @@ import { Link, Image, ChakraProvider, extendTheme } from "@chakra-ui/react"
 import reportWebVitals from './reportWebVitals';
 import { switchTheme } from "./components/Switch.js";
 import './index.css';
+/* import 'dotenv/config'
+import {} from 'dotenv/config' */
+/* import dotenv from 'dotenv'
+dotenv.config(); */
+import './env.js'
 
 const theme = extendTheme({
   components: {
