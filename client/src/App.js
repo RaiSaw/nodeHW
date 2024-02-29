@@ -1,3 +1,4 @@
+import "./env.mjs"
 import { useRef, useState, createContext, useEffect } from 'react'
 import { IconButton, useColorMode } from "@chakra-ui/react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';

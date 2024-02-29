@@ -1,4 +1,3 @@
-// In-Depth Express
 import "./env.mjs"
 import express from "express";
 import router from "./routes/index.mjs";
