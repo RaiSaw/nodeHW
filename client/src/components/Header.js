@@ -48,7 +48,7 @@ const Header = (theme) => {
       transitionDuration="0.3s"
       transitionTimingFunction="ease-in-out"
       zIndex={1}
-      boxShadow="2xl"
+      /* boxShadow="base" */
     >
       <nav className="navbar navbar-expand-lg py-2">
       <div className="container-fluid">

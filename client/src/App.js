@@ -1,7 +1,6 @@
 import { useRef, useState, createContext, useEffect } from 'react'
 import { IconButton, useColorMode } from "@chakra-ui/react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Link, useLocation } from "wouter"//Route
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import {faGoogle, faYahoo, faDiscord} from "@fortawesome/free-brands-svg-icons"
 import {faSun, faMoon} from "@fortawesome/free-solid-svg-icons"
@@ -22,7 +21,7 @@ import './App.css';
 export const ThemeContext = createContext(null);
 
 export const route = axios.create({
-    baseURL: "http://localhost:3001" /* `${process.env.SERVER_URL}` */
+    baseURL: `${process.env.SERVER_URL}`
   });
 
 export const accts = [
