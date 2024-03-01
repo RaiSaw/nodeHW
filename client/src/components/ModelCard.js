@@ -1,8 +1,7 @@
-import { Box, Tooltip, IconButton, Text, VStack, CardBody, Card, Button, useColorModeValue, Flex, ButtonGroup, useEditableControls, EditablePreview, Editable, EditableInput, Input, Select, useDisclosure, FormLabel, ModalOverlay, Modal, ModalContent, ModalHeader, ModalCloseButton, ModalBody, FormControl, ModalFooter } from "@chakra-ui/react";
-import React, { useRef, useContext } from "react";
-import {motion} from 'framer-motion'
+import { Box, Text, VStack, CardBody, Card } from "@chakra-ui/react";
+import React from "react";
 
-import { redirect, useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import '../App.css'
 
 
@@ -33,7 +32,7 @@ const ModelCard = ({title, imgUrl, type,  id, creator }) => {
         fontWeight='bold'
         >
         <CardBody pt={16} pb={4}>
-          <VStack pt={16} alignItems='flex-start' color='white' h='100%' justifyContent='flex-end' fontSize={['8','9','11']}>{/* fontSize={['8','10','12']} */}
+          <VStack pt={16} alignItems='flex-start' color='white' h='100%' justifyContent='flex-end' fontSize={['8','9','11']}>
           <Text>{title}</Text>
           <Text>{creator}</Text>
           </VStack>

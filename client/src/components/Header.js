@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import React, { useEffect, useRef, useState, createContext, useContext } from "react";
-import { Box, Image, Flex, Menu, MenuButton, MenuDivider, MenuGroup, MenuItem, MenuList} from "@chakra-ui/react";
+import React, { useEffect, useRef, useContext } from "react";
+import { Box, Image, Menu, MenuButton, MenuDivider, MenuGroup, MenuItem, MenuList} from "@chakra-ui/react";
 import { AuthContext } from "../helpers/AuthContext";
 import '../App.css'
 
@@ -34,6 +34,7 @@ const Header = (theme) => {
   const logout = () => {
     keysToRemove.forEach(k =>
       localStorage.removeItem(k))
+    console.log("Logged out!")
     setAuthState({ username: "", id: 0, status: false });
   };
   return (

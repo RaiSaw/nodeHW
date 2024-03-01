@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Textarea, Container, HStack, Flex, CloseButton, Text, Input, FormLabel, Button, Link, Card, Icon} from "@chakra-ui/react";
+import { Box, Textarea, Container, HStack, Flex, CloseButton, Text, Input, Button, Link, Card } from "@chakra-ui/react";
 import "../App.css";
 
 const Contact = () => {

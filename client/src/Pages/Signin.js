@@ -21,7 +21,7 @@ const Signin = () => {
       localStorage.removeItem("accessToken");
     }
     route
-      .post("/signin", data)
+      .post('/signin', data)
       .then((response) => {
         if (response.data.error) {
           console.log(response.data.error);

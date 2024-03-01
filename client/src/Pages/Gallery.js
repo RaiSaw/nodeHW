@@ -108,14 +108,13 @@ const Gallery = () => {
     top={0}
     mb={12}
     >
-
       <Slider data={carousel}/>
       <GalleryCateg/>
       <hr className="my-5"/>
       <Box>
         <div className="container justify-content-center flex col-lg-4 align-items-center" id="items">
           <div className="container my-4 flex col-lg-4" id="title">
-            <Button as='h4' py={6} fontWeight='semibold' fontSize={['26','30','38']} onClick={() => fetchData()}>All Models</   Button>
+            <Button as='h4' py={6} fontWeight='semibold' fontSize={['26','30','38']} onClick={() => fetchData()}>All Models</Button>
             <HStack pb={8} >
               <Button className='model-btn' onClick={() => handleObject   ()}>Objects</Button>
               <Button className='model-btn' onClick={() => handleScene    ()}>Scenes</Button>
@@ -166,7 +165,7 @@ const Gallery = () => {
           </div>
         </div>
       </Box>
-      <Text fontSize="11px" bottom={3} right={5}>_Sample images credit: unsplash.com/artstation.com</Text>
+      <Text fontSize="11px" bottom={3} right={5}>Sample images credit: unsplash.com/artstation.com</Text>
     </Box>
     )
   }

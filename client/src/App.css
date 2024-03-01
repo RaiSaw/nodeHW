@@ -273,12 +273,6 @@ form.form1 {
   text-align: 'center'
 }
 
-.auth {
-  font-size: larger;
-  padding: 5px;
-  color: #532dd1;
-}
-
 .loggedInContainer {
   flex: 50%;
   display: flex;
@@ -306,7 +300,6 @@ footer {
   border-radius: 20rem;
 }
 
-
 #img-3d, .image {
   -webkit-transition: -webkit-transform 2s;
   transition: transform 2s ease-in-out;
@@ -317,17 +310,21 @@ footer {
   transform: scale(1.05);
 }
 
+.auth {
+  font-size: larger;
+  padding: 5px;
+  color: #532dd1;
+}
+
 .icon{
   width: 30px;
   transition: 0.3s;
-  filter: drop-shadow( 1px 1px 1px rgba(0, 0, 0, 0.4) );
+  filter: drop-shadow( 1px 1px 1px rgba(66, 50, 8, 0.4) );
 }
 
 .socials{
   -webkit-transition: -webkit-transform 0.5s;
   transition: transform 0.5s ease;
-}
-.socials {
   font-size: larger;
 }
 

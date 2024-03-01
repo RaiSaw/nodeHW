@@ -6,11 +6,18 @@ import * as THREE from 'three'
 import { Canvas, createPortal, useFrame, useThree } from '@react-three/fiber'
 import { useFBO, useGLTF, useScroll, Text, Image, Scroll, Preload, ScrollControls, MeshTransmissionMaterial } from '@react-three/drei'
 import { easing } from 'maath'
+import { Route, Link, useLocation } from "wouter"
+import { redirect, useNavigate, useParams } from "react-router-dom";
 import { SampleImages } from '..';
 
+/* const routing = () => {
+  navigate("/signup")
+} */
+
 const Home = () => {
+  const navigate = useNavigate();
   const { authState } = useContext(AuthContext);
-  return (
+  return ( 
     <Canvas camera={{ position: [0, 0, 20], fov: 15 }} >
       <ScrollControls damping={0.2} pages={3} distance={0.5}>
         <Lens>
@@ -30,19 +37,17 @@ const Home = () => {
             No more barriers, no more limitations –
             <br/>
             immerse yourself in a world where imagination
-            <br/>
+            <br/> 
             knows no bounds.
             </h5>
-            <HStack spacing={8}>
-                <Button as='a' href='/signup' className='submit' variant="button" w="50%">Sign up</Button>
-                <Button as='a' href='/login' className="submit" w="50%">
-                  Sign in
-                </Button>
+            <HStack spacing={6}>
+                <Button className='submit' variant="button" w="30%" onClick={()=>navigate('/signup')}>Sign up</Button>
+                <Button className="submit" w="30%" onClick={()=>navigate('/signin')}>Sign in</Button>
             </HStack>
             </Box>
           </Scroll>
           {/** This is a helper that pre-emptively makes threejs aware of all geometries, textures etc
-               By default threejs will only process objects if they are "seen" by the camera leading 
+               By default threejs will only process objects if they are "seen" by the camera leading
                to jank as you scroll down. With <Preload> that's solved.  */}
           <Preload />
         </Lens>

@@ -1,7 +1,6 @@
 import React, {useEffect, useState, useRef} from 'react'
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { route } from '../App';
-import "../App.css";
 import { Box, Tooltip, IconButton, Text, VStack, CardBody, Card, Button, useColorModeValue, Flex, ButtonGroup, useEditableControls, EditablePreview, Editable, EditableInput, Input, Select, useDisclosure, FormLabel, ModalOverlay, Modal, ModalContent, ModalHeader, ModalCloseButton, ModalBody, FormControl, ModalFooter } from "@chakra-ui/react";
 import { CheckIcon, CloseIcon } from '@chakra-ui/icons'
 import { modelTypes } from './Gallery';
@@ -54,13 +53,14 @@ const [patch, setPatch] = useState({
   imgUrl: model.imgUrl,
   creator: model.creator ?? username
 })
+const [deleteMod, setDeleteMod] = useState(false);
 
 const handleInput = (e) => {
   setPatch({...patch, [e.target.name]: e.target.value})
 }
 const onSubmit = async (title) => {
   try {
-    const getResponse = await route.patch(`/models/${title}`,
+    const getResponse = await route.patch('/models/${title}',
     {
       title: patch.title,
       type: patch.type,
@@ -83,7 +83,7 @@ const onSubmit = async (title) => {
 
 const handleTitle = async (title) => {
   try {
-    const getResponse = await route.patch(`/models/${title}`,
+    const getResponse = await route.patch('/models/${title}',
     {
       title: newTitle
     },
@@ -122,14 +122,17 @@ const handleType = async (title) => {
     });
       console.log("Model deleted!")
       setModel(model.filter((mod) => mod.title !== title))
-      alert("Model added!")
-      navigate("/profile")
+      setDeleteMod(true)
+      setInterval(() => {
+        navigate("/profile")
+      }, 5000);
   } catch (error) {
     console.log(error);
  }
 };
   return (
     <Flex align='center' justify='center' h="100%">
+      {!deleteMod ? (
       <Box
       className='login'
       as='section'
@@ -256,18 +259,26 @@ const handleType = async (title) => {
           <Flex mt="4" justifyContent='center' border="2px solid" borderRadius="0 1rem">
             <Button className='submit' w="25%" variant="button" m='2' onClick={onOpen}>Edit</Button>
             <Button className='edit-btn' m='2' onClick={() => deleteModel(title)}>Remove</Button>
-            </Flex>
+          </Flex>
         ):(
           <Flex justifyContent="center" mt="4" border="2px solid" borderRadius="0 1rem">
             <VStack p={4}>
             <Text textShadow="1px 1px 1px white">{model.title}</Text>
-            <Text textShadow="1px 1px 1px white"t>{model.type}</Text>
+            <Text textShadow="1px 1px 1px white">{model.type}</Text>
             <Text textShadow="1px 1px 1px white">{model.creator}</Text>
             </VStack>
           </Flex>
         )
       }
       </Box>
+      ):(
+        <Container>
+        <Card>
+        <Text as='h1'>Model is successfully deleted!</Text>
+        </Card>
+      </Container>
+        )
+      }
     </Flex>
   )
 }

@@ -23,7 +23,7 @@ function Signup() {
 
   const onSubmit = (values) => {
     route
-      .post("/users", values)
+      .post(`${process.env.SERVER_URL}/users`, values)
       .then((res) => {
         if (res.status === 400) {
           throw error ("User not created!")

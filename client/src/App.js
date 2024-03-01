@@ -1,4 +1,4 @@
-import './env.js'
+/* import './env' */
 import { useState, createContext } from 'react'
 import { IconButton, useColorMode } from "@chakra-ui/react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -18,11 +18,14 @@ import Home from './Pages/Home.js';
 import Profile from './Pages/Profile.js';
 import axios from "axios";
 import './App.css';
+/* import 'dotenv/config'
+require('dotenv').config()
+console.log(process.env) */
 
 export const ThemeContext = createContext(null);
 
 export const route = axios.create({
-    baseURL: `${process.env.SERVER_URL}`
+    baseURL:/* 'https://nodehw-74og.onrender.com/' */ `${process.env.REACT_APP_SERVER_URL}`
   });
 
 /* console.log(process.env.SERVER_URL)

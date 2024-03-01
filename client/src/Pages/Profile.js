@@ -18,7 +18,7 @@ const Profile = () => {
   useEffect(() => {
     const fetchPost = async () => {
       if (!localStorage.getItem("accessToken")) {
-        navigate("/signin");
+        navigate(`${process.env.SERVER_URL}/signin`);
       } else {
         try {
           let id = authState.id
@@ -31,7 +31,7 @@ const Profile = () => {
     }
     const fetchModels = async () => {
       if (!localStorage.getItem("accessToken")) {
-        navigate("/signin");
+        navigate(`${process.env.SERVER_URL}/signin`);
       } else {
       try {
         let response = await route.get(`/${creator}`);
@@ -59,7 +59,7 @@ const img = 'Assets/simonleeUnsplash.jpg'
 const newObject = { title: newModel.title, type: newModel.type, imgUrl: newModel.imgUrl ?? img, creator: user ?? localStorage.getItem("username") };
 // POST Request
 const postData = async () => {
-  const postResponse = await route.post("/models",
+  const postResponse = await route.post(`${process.env.SERVER_URL}/models`,
   newObject,
   {
     headers: {

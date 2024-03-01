@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from "react-router-dom";
-import { Circle, Image, Menu, MenuButton, MenuDivider, MenuGroup, MenuItem, MenuList } from "@chakra-ui/react";
+import { Image } from "@chakra-ui/react";
 import '../App.css';
 
 export default class Footer extends Component {
