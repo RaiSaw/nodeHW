@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { AuthContext } from "../helpers/AuthContext";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { Card, Container, Text, SimpleGrid, Select, VStack, Box, FormLabel, Input, FormControl, FormErrorMessage, Button } from "@chakra-ui/react";
+import { ArrowBackIcon } from '@chakra-ui/icons'
+import { Card, Container, Flex, Text, SimpleGrid, Select, VStack, Box, FormLabel, Input, FormControl, FormErrorMessage, Button } from "@chakra-ui/react";
 import { route } from '../App';
 import { modelTypes } from './Gallery';
 import ModelCard from '../components/ModelCard'
@@ -59,7 +60,7 @@ const img = 'Assets/simonleeUnsplash.jpg'
 const newObject = { title: newModel.title, type: newModel.type, imgUrl: newModel.imgUrl ?? img, creator: user ?? localStorage.getItem("username") };
 // POST Request
 const postData = async () => {
-  const postResponse = await route.post(`models`,
+  const postResponse = await route.post(`/models`,
   newObject,
   {
     headers: {
@@ -105,6 +106,15 @@ const handleBlur = () => {
 
   return (
     <Box my="4rem" justifyContent="center">
+      <Flex justifyContent="flex-start">
+        <ArrowBackIcon
+        onClick={()=>navigate('/gallery')}
+        aria-label='Back icon'
+        m={8}
+        className='icon'
+        boxSize={5}
+        />
+      </Flex>
       <VStack justifyContent="start">
       <Text as="h2" mb='2rem'>Your Models: {username}</Text>
       <SimpleGrid

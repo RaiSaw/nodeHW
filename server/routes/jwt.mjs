@@ -13,7 +13,6 @@ router
 // JWT_P
 .post('/signin', passport.authenticate("local"), async (req, res) => {
     const { name, password } = req.body;
-  // const user = await Users.findOne({ where: { username: username } });
     const user = await User.findOne({name})
     if (!user) res.status(400).json({ error: "User not found!" });
 

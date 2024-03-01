@@ -2,6 +2,7 @@ import { Router } from "express";
 import { validationResult, checkSchema, matchedData } from "express-validator";
 import { modelSchema } from "../utils/validationSchema.mjs"
 import { Model } from "../mongoose/model.mjs";
+import { validateToken } from "../handlers/jwt.mjs";
 
 const router = Router();
 router
@@ -40,6 +41,7 @@ router
 .post(
     "/models",
     checkSchema(modelSchema),
+    validateToken,
     async (req, res) => {
         const result = validationResult(req);
         console.log(result);
@@ -54,7 +56,7 @@ router
     })
 })
 
-.patch("/models/:title", async(req, res) => {
+.patch("/models/:title", validateToken, async(req, res) => {
     try{
         const title = req.params.title
         const filter = { title: title };
@@ -70,7 +72,7 @@ router
     }
 })
 
-.delete("/models/:title", async(req, res) => {
+.delete("/models/:title", validateToken, async(req, res) => {
     try {
         const title = req.params.title
         const data = await Model.deleteOne({title})

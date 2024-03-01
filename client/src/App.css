@@ -310,27 +310,21 @@ footer {
   transform: scale(1.05);
 }
 
-.auth {
+.mode {
   font-size: larger;
-  padding: 5px;
-  color: #532dd1;
-}
-
-.icon{
-  width: 30px;
-  transition: 0.3s;
   filter: drop-shadow( 1px 1px 1px rgba(66, 50, 8, 0.4) );
 }
 
-.socials{
+.icon{
   -webkit-transition: -webkit-transform 0.5s;
   transition: transform 0.5s ease;
   font-size: larger;
+  color: #532dd1;
 }
 
-.socials:hover, .icon a:hover {
-  -webkit-transform:scale(1.2);
-  transform:scale(1.2);
+.icon:hover {
+  -webkit-transform:scale(1.1);
+  transform:scale(1.1);
 }
 
 i, #btn-contact, #x  {
@@ -343,12 +337,14 @@ i, #btn-contact, #x  {
 #contact-title {
   text-transform: capitalize;
   font-weight: bolder;
+  color: #fff;
   filter: drop-shadow(black 1px 1px 1px);
 }
 
 #contact-p, .label-contact{
   font-weight: 500;
   margin: 1rem;
+  color: #fff;
   filter: drop-shadow(black 1px 1px 1px);
 }
 

@@ -3,6 +3,7 @@ import { query, validationResult, checkSchema, matchedData } from "express-valid
 import { userSchema } from "../utils/validationSchema.mjs"
 import { User } from "../mongoose/user.mjs";
 import { createUserHandler, authorize } from "../handlers/users.mjs";
+import { validateToken } from "../handlers/jwt.mjs";
 
 const router = Router();
 router
@@ -13,6 +14,7 @@ router
         .withMessage("Must not be empty")
         .isLength({ min: 5, max: 10})
         .withMessage("Must be at least 5-10 characters"), */
+        validateToken,
     async (req, res) => {
         console.log(req.session.id);
         console.log(req.session)
@@ -37,7 +39,7 @@ router
         */
 })
 
-.get("/users/:id", async (req, res) => {
+.get("/users/:id", validateToken, async (req, res) => {
     const {id} = req.params
     console.log(id)
     try {
@@ -59,7 +61,7 @@ router
 /* .put("/users/:id", handleIndexId, (req, res) => {
 }) */
 
-.patch("/users/:id", async(req, res) => {
+.patch("/users/:id", validateToken, async(req, res) => {
 	/* const data = matchedData(req);
 	data.password = hashPassword(data.password);
 	const newUser = new User(data); */
@@ -77,7 +79,7 @@ router
     }
 })
 
-.delete("/users/:id", async(req, res) => {
+.delete("/users/:id", validateToken, async(req, res) => {
     try {
         const id = req.params.id
         const data = await User.findByIdAndDelete(id)

@@ -8,15 +8,17 @@ export const createTokens = (user) => {
 }
 
 export const validateToken = (req, res, next) => {
-    const accessToken = req.cookies["access-token"];
+  const accessToken = req.header("accessToken");
+  /* const accessToken = req.cookies["access-token"]; */
+
     console.log(accessToken)
     if (!accessToken)
-      return res.status(400).json({ error: "User not Authenticated!" });
+      return res.status(400).json({ error: "User not logged in!" });
 
     try {
       const validToken = verify(accessToken, process.env.ACCESS_TOKEN);
+      req.user = validToken;
       if (validToken) {
-        req.authenticated = true;
         return next();
       }
     } catch (err) {

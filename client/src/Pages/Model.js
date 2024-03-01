@@ -1,10 +1,12 @@
 import React, {useEffect, useState, useRef} from 'react'
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { route } from '../App';
-import { Box, Tooltip, IconButton, Text, VStack, CardBody, Card, Button, useColorModeValue, Flex, ButtonGroup, useEditableControls, EditablePreview, Editable, EditableInput, Input, Select, useDisclosure, FormLabel, ModalOverlay, Modal, ModalContent, ModalHeader, ModalCloseButton, ModalBody, FormControl, ModalFooter } from "@chakra-ui/react";
+import { ArrowBackIcon } from '@chakra-ui/icons'
+import { Box, Tooltip, IconButton, Text, VStack, CardBody, Card, Button, useColorModeValue, Flex, ButtonGroup, useEditableControls, EditablePreview, Editable, EditableInput, Input, Select, useDisclosure, FormLabel, ModalOverlay, Modal, ModalContent, ModalHeader, ModalCloseButton, ModalBody, FormControl, ModalFooter, Container } from "@chakra-ui/react";
 import { CheckIcon, CloseIcon } from '@chakra-ui/icons'
 import { modelTypes } from './Gallery';
 import '../App.css'
+import {Formik} from 'formik'
 
 
 const EditableControls =  () => {
@@ -26,64 +28,73 @@ const EditableControls =  () => {
 }
 
 const Model = () => {
-  const [model, setModel] = useState([])
+  const navigate = useNavigate();
+  const username = localStorage.getItem("username")
+  const [model, setModel] = useState({
+    title: "",
+    type: "",
+    imgUrl: "",
+    creator: username
+  })
   let { title } = useParams();
   const { isOpen, onOpen, onClose } = useDisclosure()
   const initialRef = useRef(null)
   const finalRef = useRef(null)
-  const username = localStorage.getItem("username")
+
 
   useEffect(() => {
+    if (!localStorage.getItem("accessToken")) {
+      navigate("/signin");
+    }
     route.get(`/models/${title}`)
     .then((res) => {
-        setModel(res.data)
-        console.log(res.data)
+        setModel({
+          title: res.data.title,
+          type: res.data.type,
+          imgUrl: res.data.imgUrl,
+          creator: username
+        })
     })
     .catch((error) => {
         console.log(error)
     })
 }, [])
+console.log(model)
 
-  //EDIT model data
-const [newTitle, setNewTitle] = useState(model.title)
-const [edit, setEdit] = useState(model.type)
-const [patch, setPatch] = useState({
+//EDIT model data
+const updateModel = {
   title: model.title,
   type: model.type,
   imgUrl: model.imgUrl,
-  creator: model.creator ?? username
-})
-const [deleteMod, setDeleteMod] = useState(false);
+  creator: username
+}
 
 const handleInput = (e) => {
-  setPatch({...patch, [e.target.name]: e.target.value})
+  setModel({...model, [e.target.name]: e.target.value})
 }
-const onSubmit = async (title) => {
-  try {
-    const getResponse = await route.patch('/models/${title}',
+const onSubmit = async (title, type, imgUrl, option) => {
+    const getResponse = await route.patch(`/models/${title}`,
     {
-      title: patch.title,
-      type: patch.type,
-      imgUrl: patch.imgUrl,
-      creator: patch.creator
-
+      title: model.title,
+      type: model.type,
+      imgUrl: model.imgUrl,
+      creator: username
     },
     {
       headers: { accessToken: localStorage.getItem("accessToken") },
     }
     )
-    console.log("Model added!")
-    alert("Model added!")
-    setModel([getResponse.data, ...model])
-    navigate("/profile")
-  } catch (err) {
-      console.log(`Error: ${err.emssage}`)
+    console.log("Model title updated!")
+    setModel({...model, [e.target.name]: e.target.value})
   }
-}
+
+// PATCH Request - Chakra editable component
+const [newTitle, setNewTitle] = useState(model.title)
+const [edit, setEdit] = useState(model.type)
 
 const handleTitle = async (title) => {
   try {
-    const getResponse = await route.patch('/models/${title}',
+    const getResponse = await route.patch(`/models/${title}`,
     {
       title: newTitle
     },
@@ -91,13 +102,14 @@ const handleTitle = async (title) => {
       headers: { accessToken: localStorage.getItem("accessToken") },
     }
     )
-      console.log("Model title updated!")
+      alert("Model title updated!")
   } catch (err) {
       console.log(`Error: ${err.emssage}`)
   }
 }
 
-// PATCH Request - Chakra editable component
+console.log(newTitle)
+
 const handleType = async (title) => {
   try {
     const getResponse = await route.patch(`/models/${title}`,
@@ -108,31 +120,40 @@ const handleType = async (title) => {
       headers: { accessToken: localStorage.getItem("accessToken") },
     }
     )
-    console.log("Model type updated!")
+    alert("Model type updated!")
   } catch (err) {
       console.log(`Error: ${err.emssage}`)
   }
 }
+
  //DELETE
  const deleteModel = async (title) => {
   try {
     await route.delete(`/models/${title}`,
     {
       headers: { accessToken: localStorage.getItem("accessToken") },
-    });
-      console.log("Model deleted!")
-      setModel(model.filter((mod) => mod.title !== title))
-      setDeleteMod(true)
-      setInterval(() => {
-        navigate("/profile")
-      }, 5000);
+    }
+    )
+      setModel("")
+      alert("Model deleted!")
+      navigate("/profile")
   } catch (error) {
     console.log(error);
  }
 };
   return (
-    <Flex align='center' justify='center' h="100%">
-      {!deleteMod ? (
+    <Box>
+      <Flex justifyContent="flex-start">
+        <ArrowBackIcon
+        boxSize={5}
+        onClick={()=>navigate('/profile')}
+        variant='solid'
+        aria-label='Back icon'
+        m={8}
+        className='icon'
+        />
+      </Flex>
+      <Flex align='center' justify='center' h="100%">
       <Box
       className='login'
       as='section'
@@ -158,12 +179,15 @@ const handleType = async (title) => {
       >
         <CardBody pt={16} pb={4} >
           <VStack pt={16} alignItems='flex-start' color='white' h='100%' justifyContent='flex-end' fontSize={['8','9','11']}>
+            <Text>{model.title}</Text>
+            <Text>{model.type}</Text>
           <Editable
           defaultValue={model.title}
           fontSize='md'
           isPreviewFocusable={true}
           selectAllOnFocus={false}
           onSubmit={handleTitle}
+          value={newTitle}
           onChange={(newValue) => setNewTitle(newValue)}
           >
           <Tooltip label="Click to edit" shouldWrapChildren={true}>
@@ -186,6 +210,7 @@ const handleType = async (title) => {
           selectAllOnFocus={false}
           defaultValue={model.type}
           fontSize='sm'
+          value={edit}
           onSubmit={handleType}
           onChange={(newValue) => setEdit(newValue)}
           >
@@ -219,18 +244,31 @@ const handleType = async (title) => {
       >
         <ModalOverlay />
         <ModalContent>
-        <form onSubmit={onSubmit}>
           <ModalHeader>Edit model</ModalHeader>
           <ModalCloseButton />
+          <Formik
+          initialValues={updateModel}
+          onSubmit={onSubmit}
+          >
+          <form>
           <ModalBody pb={6}>
             <FormControl>
               <FormLabel>Title</FormLabel>
-              <Input id="title" type="text" name="title" ref={initialRef} defaultValue={model.title} onChange={handleInput}/>
+              <Input
+              id="title"
+              type="text"
+              name="title"
+              ref={initialRef}
+              />
             </FormControl>
 
             <FormControl mt={4}>
               <FormLabel>Type</FormLabel>
-              <Select id="type" type="type" name="type" defaultValue={model.type} onChange={handleInput}>
+              <Select
+              id="type"
+              type="type"
+              name="type"
+              >
               {modelTypes.map((type) => (
                 <option key={type.id}>{type.type}</option>
               ))}
@@ -238,7 +276,11 @@ const handleType = async (title) => {
             </FormControl>
             <FormControl>
               <FormLabel>File</FormLabel>
-              <Input id="imgUrl" type="text" name="imgUrl" ref={initialRef} defaultValue={model.imgUrl} onChange={handleInput}/>
+              <Input
+              id="imgUrl"
+              type="text"
+              name="imgUrl"
+              />
             </FormControl>
 
           </ModalBody>
@@ -249,6 +291,7 @@ const handleType = async (title) => {
             <Button className="edit-btn"onClick={onClose}>Cancel</Button>
           </ModalFooter>
           </form>
+          </Formik>
         </ModalContent>
       </Modal>
       </VStack>
@@ -271,15 +314,8 @@ const handleType = async (title) => {
         )
       }
       </Box>
-      ):(
-        <Container>
-        <Card>
-        <Text as='h1'>Model is successfully deleted!</Text>
-        </Card>
-      </Container>
-        )
-      }
-    </Flex>
+      </Flex>
+    </Box>
   )
 }
 export default Model

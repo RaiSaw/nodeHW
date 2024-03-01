@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import { Card, Link, Container, Flex, Button,  IconButton, Input, InputRightElement, InputGroup, Text, Box, FormControl, AbsoluteCenter, FormErrorMessage, Divider, VStack, HStack} from "@chakra-ui/react";
+import { Card, Link, Container, CloseButton, Flex, Button,  IconButton, Input, InputRightElement, InputGroup, Text, Box, FormControl, AbsoluteCenter, FormErrorMessage, Divider, VStack, HStack} from "@chakra-ui/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {Formik, Field, Form} from 'formik'
 import * as Yup from 'yup';
@@ -23,7 +23,7 @@ function Signup() {
 
   const onSubmit = (values) => {
     route
-      .post(`${process.env.SERVER_URL}/users`, values)
+      .post(`/users`, values)
       .then((res) => {
         if (res.status === 400) {
           throw error ("User not created!")
@@ -60,6 +60,15 @@ function Signup() {
     >
     {!submit ? (
     <Card className="cardMain" boxShadow="2xl">
+      <Flex justifyContent="flex-end">
+        <CloseButton
+        size='md'
+        onClick={()=>navigate('/')}
+        variant='solid'
+        aria-label='Close icon'
+        className='mode'
+        />
+      </Flex>
       <VStack justifyContent='center'>
         <Text className="sign">
           Sign up
@@ -133,7 +142,7 @@ function Signup() {
             <HStack gap={2}>
                 {accts.map((acct) =>(
                   <a key={acct.url} href={acct.url} rel='navicons'>
-                    <FontAwesomeIcon className='auth' icon={acct.icon} />
+                    <FontAwesomeIcon className='icon' icon={acct.icon} />
                   </a>
                 ))}
             </HStack>

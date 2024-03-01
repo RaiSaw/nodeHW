@@ -1,8 +1,10 @@
 import React from 'react'
+import { useNavigate } from "react-router-dom";
 import { Box, Textarea, Container, HStack, Flex, CloseButton, Text, Input, Button, Link, Card } from "@chakra-ui/react";
 import "../App.css";
 
 const Contact = () => {
+  const navigate = useNavigate();
   return (
     <Flex align='center' justify='center'>
     <Box
@@ -33,15 +35,14 @@ const Contact = () => {
             <Text as="h5" my="1" id='contact-title'>Contact us</Text>
             <i className="fa-solid fa-envelope"></i>
           </HStack>
-            <CloseButton size='md'
-            as='a'
-            href='/'
-            variant='solid'
-            aria-label='Close icon'
-            color="white"
-            id='x'
-            justifySelf="end"
-            />
+          <CloseButton size='md'
+          onClick={()=>navigate('/gallery')}
+          variant='solid'
+          aria-label='Close icon'
+          color="white"
+          id='x'
+          justifySelf="end"
+          />
           </HStack>
           <Text mb="2" id='contact-p'>We'd love to hear from you.<br />Please drop your name, email and message.</Text>
         <form className='form1' action="#" method="POST">
@@ -53,9 +54,9 @@ const Contact = () => {
           </Flex>
         </form>
         <Box className="space-x-8 my-6 flex justify-center">
-          <Link className="socials" href="linkedin.com"><i className="fa-brands fa-linkedin"></i></Link>
-          <Link className="socials" href="discord.com"><i className="fa-brands fa-discord"></i></Link>
-          <Link className="socials" href="instagram.com"><i className="fa-brands fa-instagram"></i></Link>
+          <Link className="icon" href="linkedin.com"><i className="fa-brands fa-linkedin"></i></Link>
+          <Link className="icon" href="discord.com"><i className="fa-brands fa-discord"></i></Link>
+          <Link className="icon" href="instagram.com"><i className="fa-brands fa-instagram"></i></Link>
         </Box>
       </Card>
       </Container>

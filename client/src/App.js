@@ -1,4 +1,3 @@
-/* import './env' */
 import { useState, createContext } from 'react'
 import { IconButton, useColorMode } from "@chakra-ui/react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -72,7 +71,7 @@ export default function App() {
       right={5}
       variant='ghost'
       zIndex={1}
-      onClick={toggleColorMode} icon={colorMode === "dark" ? <FontAwesomeIcon className="icon" icon={faSun} color= "#FFD43B" /> : <FontAwesomeIcon className="icon" icon={faMoon}/>}
+      onClick={toggleColorMode} icon={colorMode === "dark" ? <FontAwesomeIcon className="mode" icon={faSun} color= "#FFD43B" /> : <FontAwesomeIcon className="mode" icon={faMoon}/>}
       />
     </AuthContext.Provider>
   )

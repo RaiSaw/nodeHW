@@ -21,7 +21,7 @@ function Slider(props) {
             <div className="carousel-caption text-start">
               <Text as='h3' mb={4}>{carousel.title}</Text>
               <Text as='h3' mb={6} fontSize={['14','16','20']}className="opacity-75">{carousel.description}</Text>
-              <Button className="submit" variant="button" href="/" w="10%">Learn more</Button>
+              <Button className="submit" variant="button" href="/" w="15%">Learn more</Button>
             </div>
           </div>
         </div>

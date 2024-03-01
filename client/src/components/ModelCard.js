@@ -9,7 +9,7 @@ const ModelCard = ({title, imgUrl, type,  id, creator }) => {
   const navigate = useNavigate();
     return(
       <Box
-      id='cont'
+      className='cont'
       borderRadius='xl'
       boxShadow='dark-lg'
       onClick={() => {

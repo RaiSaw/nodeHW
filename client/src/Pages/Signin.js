@@ -1,5 +1,5 @@
 import React, {useState, useContext} from "react";
-import { Card, Link, Text, Flex, Box, Divider, InputGroup, Input, VStack, InputRightElement, IconButton, HStack, Button } from "@chakra-ui/react";
+import { Card, Link, Text, CloseButton, Flex, Box, Divider, InputGroup, Input, VStack, InputRightElement, IconButton, HStack, Button } from "@chakra-ui/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { route, accts } from '../App';
 import { AuthContext } from "../helpers/AuthContext";
@@ -58,6 +58,15 @@ const Signin = () => {
     border= 'none'
     >
     <Card className="cardMain" boxShadow="2xl">
+      <Flex justifyContent="flex-end">
+        <CloseButton
+        size='md'
+        onClick={()=>navigate('/')}
+        variant='solid'
+        aria-label='Close icon'
+        className='mode'
+        />
+      </Flex>
       <VStack justifyItems="center">
       <Text className="sign">
         Sign in
@@ -103,7 +112,7 @@ const Signin = () => {
         </Button>
       </form>
         <VStack>
-          <Link className="redi" href="signup" >Don't have an account yet?</Link>
+          <Link className="redi" onClick={()=>navigate('/signup')} >Don't have an account yet?</Link>
           <Box position='relative'>
           <Divider className="divider" border="0.5px dashed"/>
           <Text className="authText">or sign in with</Text>
@@ -111,7 +120,7 @@ const Signin = () => {
           <HStack gap={2}>
             {accts.map((acct) =>(
               <a key={acct.url} href={acct.url} rel='navicons'>
-                <FontAwesomeIcon  className='auth' icon={acct.icon} />
+                <FontAwesomeIcon  className='icon' icon={acct.icon} />
               </a>
             ))}
           </HStack>

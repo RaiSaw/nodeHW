@@ -17,7 +17,7 @@ import { SampleImages } from '..';
 const Home = () => {
   const navigate = useNavigate();
   const { authState } = useContext(AuthContext);
-  return ( 
+  return (
     <Canvas camera={{ position: [0, 0, 20], fov: 15 }} >
       <ScrollControls damping={0.2} pages={3} distance={0.5}>
         <Lens>
