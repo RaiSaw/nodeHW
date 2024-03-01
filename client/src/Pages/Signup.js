@@ -125,7 +125,7 @@ function Signup() {
           )}
         </Formik>
         <VStack>
-          <Link className="redi" href="signin">Already have an account? </Link>
+          <Link className="redi" onClick={()=>navigate('/signin')}>Already have an account? </Link>
           <Box position='relative'>
             <Divider className="divider" border="0.5px dashed" />
             <Text className="authText">or sign in with</Text>

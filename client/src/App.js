@@ -18,18 +18,13 @@ import Home from './Pages/Home.js';
 import Profile from './Pages/Profile.js';
 import axios from "axios";
 import './App.css';
-/* import 'dotenv/config'
-require('dotenv').config()
-console.log(process.env) */
 
 export const ThemeContext = createContext(null);
 
 export const route = axios.create({
-    baseURL:/* 'https://nodehw-74og.onrender.com/' */ `${process.env.REACT_APP_SERVER_URL}`
+    baseURL:`${process.env.REACT_APP_SERVER_URL}`
   });
 
-/* console.log(process.env.SERVER_URL)
- */
 export const accts = [
   {
     icon: faGoogle,

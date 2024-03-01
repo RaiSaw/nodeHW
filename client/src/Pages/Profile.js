@@ -18,7 +18,7 @@ const Profile = () => {
   useEffect(() => {
     const fetchPost = async () => {
       if (!localStorage.getItem("accessToken")) {
-        navigate(`${process.env.SERVER_URL}/signin`);
+        navigate(`/signin`);
       } else {
         try {
           let id = authState.id
@@ -31,7 +31,7 @@ const Profile = () => {
     }
     const fetchModels = async () => {
       if (!localStorage.getItem("accessToken")) {
-        navigate(`${process.env.SERVER_URL}/signin`);
+        navigate(`/signin`);
       } else {
       try {
         let response = await route.get(`/${creator}`);
@@ -59,7 +59,7 @@ const img = 'Assets/simonleeUnsplash.jpg'
 const newObject = { title: newModel.title, type: newModel.type, imgUrl: newModel.imgUrl ?? img, creator: user ?? localStorage.getItem("username") };
 // POST Request
 const postData = async () => {
-  const postResponse = await route.post(`${process.env.SERVER_URL}/models`,
+  const postResponse = await route.post(`models`,
   newObject,
   {
     headers: {
@@ -83,7 +83,7 @@ const postData = async () => {
 const handleAddModel = () => {
   // Update the state with the new item
   postData([...models, newObject])
-  alert("Thanks for creating a new model!")
+  alert("Model created!")
   // Clear the input fields
   setNewModel({
     imgUrl: '',
